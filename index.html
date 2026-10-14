@@ -540,10 +540,10 @@
       var maxY = window.innerHeight - size.h - margin;
 
       var x;
-      if (Math.random() < 0.8 && maxX > colEdge) {
+      if (maxX > colEdge) {
         x = randomBetween(colEdge, maxX);
       } else {
-        x = randomBetween(margin, Math.max(margin, maxX));
+        x = randomBetween(colEdge, Math.max(colEdge, maxX));
       }
       var y = randomBetween(margin, Math.max(margin, maxY));
 
