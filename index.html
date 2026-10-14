@@ -50,22 +50,40 @@
       line-height: 1.6;
       cursor: default;
     }
+
+    /* Monospace project links */
     .client-projects { list-style: none; padding-left: 1em; }
-    .client-projects li { line-height: 1.6; }
+    .client-projects li { line-height: 1.6; font-family: 'Courier New', Courier, monospace; font-size: 0.85em; }
 
     a { color: #1155cc; text-decoration: underline; }
     a:hover { color: #0b3d91; }
 
+    /* About toggle */
     .about-link {
       position: fixed; top: 20px; right: 20px;
-      font-size: 1em; color: #000; text-decoration: none;
-      font-family: 'Times New Roman', Times, serif; z-index: 100;
+      font-size: 0.85em; color: #000; text-decoration: none;
+      font-family: 'Courier New', Courier, monospace; z-index: 100;
+      letter-spacing: 0.02em;
     }
     .about-link:hover { text-decoration: underline; }
 
     .about-section { display: none; margin-top: 1.2em; }
     .about-section.visible { display: block; }
     .about-section p { font-size: 1em; line-height: 1.6; }
+
+    /* Cursor readout */
+    #cursor-readout {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.7em;
+      color: #aaa;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      z-index: 1000;
+      user-select: none;
+    }
 
     /* Ghost cards */
     .ghost-card {
@@ -86,13 +104,26 @@
       opacity: 0.92;
     }
 
+    /* Grain overlay on ghost cards */
+    .ghost-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 1;
+    }
+
     .ghost-card.visible { opacity: 1; }
     .ghost-card.fading { opacity: 0; transition: opacity 1.4s ease; }
   </style>
 </head>
 <body>
 
-  <a href="#" class="about-link" onclick="toggleAbout(event)">About</a>
+  <a href="#" class="about-link" id="about-toggle" onclick="toggleAbout(event)">[+] about</a>
+  <div id="cursor-readout">X: 000 &nbsp; Y: 000</div>
 
   <div class="page">
     <main>
@@ -471,13 +502,25 @@
   <script>
     function toggleAbout(e) {
       e.preventDefault();
-      document.getElementById('about').classList.toggle('visible');
+      var section = document.getElementById('about');
+      var toggle = document.getElementById('about-toggle');
+      var open = section.classList.toggle('visible');
+      toggle.textContent = open ? '[-] about' : '[+] about';
     }
+
+    // Cursor readout
+    var readout = document.getElementById('cursor-readout');
+    document.addEventListener('mousemove', function(e) {
+      var x = String(e.clientX).padStart(4, '0');
+      var y = String(e.clientY).padStart(4, '0');
+      readout.innerHTML = 'X: ' + x + ' &nbsp; Y: ' + y;
+    });
 
     // --- Scattered Ghost Cards ---
     var cards = [];
     var MAX_CARDS = 8;
     var ogCache = {};
+    var activeThumbUrls = new Set(); // dedupe: no same thumb twice on screen
 
     var SIZES = [
       { w: 260, h: 180 },
@@ -560,6 +603,9 @@
       document.body.appendChild(card);
       requestAnimationFrame(function() { card.classList.add('visible'); });
 
+      if (ogImg) activeThumbUrls.add(ogImg);
+      card._thumbUrl = ogImg || null;
+
       cards.push(card);
       if (cards.length > MAX_CARDS) {
         var old = cards.shift();
@@ -570,6 +616,7 @@
     }
 
     function fadeOut(card) {
+      if (card._thumbUrl) activeThumbUrls.delete(card._thumbUrl);
       card.classList.remove('visible');
       card.classList.add('fading');
       setTimeout(function() { if (card.parentNode) card.parentNode.removeChild(card); }, 1500);
@@ -608,14 +655,10 @@
     };
 
     function getOgAndSpawn(url, title) {
-      // Check Mux map first
       var muxThumb = MUX_THUMBS[url];
-      if (muxThumb) {
-        spawnCard(url, muxThumb, title);
-        return;
-      }
-      // Fall back to text card for unmapped URLs
-      spawnCard(url, null, title);
+      // Skip if this exact thumbnail is already visible
+      if (muxThumb && activeThumbUrls.has(muxThumb)) return;
+      spawnCard(url, muxThumb || null, title);
     }
 
     document.querySelectorAll('.client-projects a').forEach(function(a) {
@@ -628,6 +671,7 @@
     document.addEventListener('mouseleave', function() {
       cards.forEach(function(c) { fadeOut(c); });
       cards = [];
+      activeThumbUrls.clear();
     });
   </script>
 </body>
