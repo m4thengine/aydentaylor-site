@@ -607,8 +607,11 @@
       card._thumbUrl = ogImg || null;
 
       cards.push(card);
+      scheduleAutoFade(card);
+
       if (cards.length > MAX_CARDS) {
         var old = cards.shift();
+        if (old._autoFade) clearTimeout(old._autoFade);
         fadeOut(old);
       }
 
@@ -669,12 +672,24 @@
     });
 
     document.addEventListener('mouseleave', function() {
-      cards.forEach(function(c) { fadeOut(c); });
+      cards.forEach(function(c) {
+        if (c._autoFade) clearTimeout(c._autoFade);
+        fadeOut(c);
+      });
       cards = [];
       activeThumbUrls.clear();
     });
 
-    // Scroll: parallax drift + fade based on distance scrolled from spawn point
+    // Auto-fade: each card lives for 3s then dissolves on its own
+    function scheduleAutoFade(card) {
+      card._autoFade = setTimeout(function() {
+        var idx = cards.indexOf(card);
+        if (idx > -1) cards.splice(idx, 1);
+        fadeOut(card);
+      }, 3000);
+    }
+
+    // Scroll: parallax drift only — fade is handled by the timer above
     var lastScrollY = window.scrollY;
     window.addEventListener('scroll', function() {
       var currentY = window.scrollY;
@@ -682,23 +697,8 @@
       lastScrollY = currentY;
 
       cards.forEach(function(c) {
-        // Parallax: cards drift up at 30% of scroll speed
         var currentTop = parseFloat(c.style.top) || 0;
         c.style.top = (currentTop - delta * 0.3) + 'px';
-
-        // Track total scroll distance from where card was born
-        c._scrollDist = (c._scrollDist || 0) + Math.abs(delta);
-
-        // Fade out after 400px of total scroll
-        var fade = Math.max(0, 1 - c._scrollDist / 400);
-        c.style.opacity = fade;
-
-        if (fade <= 0) {
-          var idx = cards.indexOf(c);
-          if (idx > -1) cards.splice(idx, 1);
-          if (c._thumbUrl) activeThumbUrls.delete(c._thumbUrl);
-          if (c.parentNode) c.parentNode.removeChild(c);
-        }
       });
     }, { passive: true });
   </script>
