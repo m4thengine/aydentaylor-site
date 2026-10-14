@@ -673,6 +673,34 @@
       cards = [];
       activeThumbUrls.clear();
     });
+
+    // Scroll: parallax drift + fade based on distance scrolled from spawn point
+    var lastScrollY = window.scrollY;
+    window.addEventListener('scroll', function() {
+      var currentY = window.scrollY;
+      var delta = currentY - lastScrollY;
+      lastScrollY = currentY;
+
+      cards.forEach(function(c) {
+        // Parallax: cards drift up at 30% of scroll speed
+        var currentTop = parseFloat(c.style.top) || 0;
+        c.style.top = (currentTop - delta * 0.3) + 'px';
+
+        // Track total scroll distance from where card was born
+        c._scrollDist = (c._scrollDist || 0) + Math.abs(delta);
+
+        // Fade out after 400px of total scroll
+        var fade = Math.max(0, 1 - c._scrollDist / 400);
+        c.style.opacity = fade;
+
+        if (fade <= 0) {
+          var idx = cards.indexOf(c);
+          if (idx > -1) cards.splice(idx, 1);
+          if (c._thumbUrl) activeThumbUrls.delete(c._thumbUrl);
+          if (c.parentNode) c.parentNode.removeChild(c);
+        }
+      });
+    }, { passive: true });
   </script>
 </body>
 </html>
