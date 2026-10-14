@@ -99,7 +99,7 @@
     .ghost-card img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       display: block;
       opacity: 0.92;
     }
@@ -562,16 +562,16 @@
         img.style.display = 'block';
         img.onload = function() {
           var nat = img.naturalWidth / img.naturalHeight;
-          // target area ~220x220 = 48400px², reshape to match actual ratio
-          var area = size.w * size.h;
-          var newW = Math.round(Math.sqrt(area * nat));
-          var newH = Math.round(Math.sqrt(area / nat));
-          // clamp so nothing gets absurdly tall or wide
-          newW = Math.min(Math.max(newW, 140), 380);
-          newH = Math.min(Math.max(newH, 120), 420);
+          // Fix width at 280px, derive height from actual aspect ratio — no crop
+          var newW = 280;
+          var newH = Math.round(newW / nat);
+          // clamp height so nothing gets absurdly tall
+          if (newH > 420) { newH = 420; newW = Math.round(newH * nat); }
+          if (newH < 120) { newH = 120; newW = Math.round(newH * nat); }
+          newW = Math.min(newW, 380);
           card.style.width = newW + 'px';
           card.style.height = newH + 'px';
-          // nudge back on screen if the resize pushed it off
+          // nudge back on screen if resize pushed it off
           var cx = parseFloat(card.style.left);
           var cy = parseFloat(card.style.top);
           if (cx + newW > window.innerWidth - 20) card.style.left = (window.innerWidth - newW - 20) + 'px';
