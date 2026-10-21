@@ -96,12 +96,16 @@
       transition: opacity 0.15s ease;
     }
 
+    .ghost-card.light-bg {
+      background: #fff;
+    }
+
     .ghost-card img {
       width: 100%;
       height: 100%;
       object-fit: contain;
       display: block;
-      opacity: 0.92;
+      opacity: 1;
     }
 
     /* Grain overlay on ghost cards */
@@ -541,7 +545,7 @@
 
     function randomBetween(a, b) { return a + Math.random() * (b - a); }
 
-    function spawnCard(url, ogImg, title) {
+    function spawnCard(url, ogImg, title, isLight) {
       var size = SIZES[Math.floor(Math.random() * SIZES.length)];
       var margin = 40;
       var colEdge = 660;
@@ -557,7 +561,7 @@
       var y = randomBetween(margin, Math.max(margin, maxY));
 
       var card = document.createElement('div');
-      card.className = 'ghost-card';
+      card.className = 'ghost-card' + (isLight ? ' light-bg' : '');
       card.style.width = size.w + 'px';
       card.style.height = size.h + 'px';
       card.style.left = x + 'px';
@@ -675,11 +679,25 @@
       'https://youtu.be/NM-c_-aUGZA?si=gu0eAFkoE4Y1c2IK&t=303': '/img/complex-logo.jpg',
     };
 
+    // Static /img/ thumbnails with white backgrounds — use light card bg
+    var LIGHT_BG_THUMBS = new Set([
+      '/img/hypebeast-logo.jpg',
+      '/img/complex-logo.jpg',
+      '/img/lyf-yeat.jpg',
+      '/img/fighting-demons-juice-wrld.jpg',
+      '/img/calling-my-phone-lil-tjay.jpg',
+      '/img/headshot-lil-tjay.jpg',
+      '/img/dont-play-that-king-von-ft.-21-savage.jpg',
+      '/img/hottest-hood-princess-sexyy-red.jpg',
+      '/img/hypebeast-asap-mob.jpg',
+    ]);
+
     function getOgAndSpawn(url, title) {
       var muxThumb = MUX_THUMBS[url];
       // Skip if this exact thumbnail is already visible
       if (muxThumb && activeThumbUrls.has(muxThumb)) return;
-      spawnCard(url, muxThumb || null, title);
+      var isLight = muxThumb && LIGHT_BG_THUMBS.has(muxThumb);
+      spawnCard(url, muxThumb || null, title, isLight);
     }
 
     document.querySelectorAll('.client-projects a').forEach(function(a) {
