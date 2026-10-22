@@ -122,6 +122,31 @@
 
     .ghost-card.visible { opacity: 1; }
     .ghost-card.fading { opacity: 0; transition: opacity 1.4s ease; }
+    /* Work index */
+    .page.wide { max-width: 860px; }
+    .press-line { margin-top: 0.5em; }
+    .filters { font-family: 'Courier New', Courier, monospace; font-size: 0.8em; display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0.5em 0 1em; }
+    .filters button, .index th button { font: inherit; color: #8a8a8f; background: none; border: 0; padding: 0; cursor: pointer; }
+    .filters button[aria-pressed="true"], .index th button[aria-sort] { color: #000; }
+    .filters button[aria-pressed="true"] { text-decoration: underline; }
+    .index { width: 100%; border-collapse: collapse; font-family: 'Courier New', Courier, monospace; font-size: 0.85em; }
+    .index th { text-align: left; font-weight: normal; padding: 0 16px 6px 0; border-bottom: 1px solid #000; white-space: nowrap; }
+    .index td { padding: 5px 16px 5px 0; border-bottom: 1px solid #e6e6ea; vertical-align: top; line-height: 1.4; }
+    .index td.n { color: #8a8a8f; width: 2.5em; font-variant-numeric: tabular-nums; }
+    .index td.c { font-family: 'Times New Roman', Times, serif; font-size: 1.15em; }
+    .index td.d { color: #8a8a8f; white-space: nowrap; }
+    .index tr[hidden] { display: none; }
+    button:focus-visible { outline: 2px solid #1155cc; outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .index thead { display: none; }
+      .index, .index tbody, .index tr, .index td { display: block; width: 100%; }
+      .index tr { padding: 8px 0; border-bottom: 1px solid #e6e6ea; }
+      .index tr[hidden] { display: none; }
+      .index td { border: 0; padding: 0; }
+      .index td.n { display: none; }
+      .index td.c, .index td.d { display: inline; width: auto; font-size: 0.95em; }
+      .index td.c::after { content: " \00B7  "; color: #8a8a8f; }
+    }
   </style>
 </head>
 <body>
@@ -129,377 +154,99 @@
   <a href="#" class="about-link" id="about-toggle" onclick="toggleAbout(event)">[+] about</a>
   <div id="cursor-readout">X: 000 &nbsp; Y: 000</div>
 
-  <div class="page">
+  <div class="page wide">
     <main>
       <h1 class="name">Ayden Taylor</h1>
       <p class="role">Creative Director</p>
       <p class="employer-link">@ <a href="https://www.uox.studio" target="_blank" rel="noopener">UOX STUDIO</a></p>
+      <p class="press-line">Featured in <a href="https://hypebeast.com/2018/1/math-collage-artist-asap-mob" target="_blank" rel="noopener">Hypebeast</a> and <a href="https://youtu.be/NM-c_-aUGZA?si=gu0eAFkoE4Y1c2IK&t=303" target="_blank" rel="noopener">Complex</a></p>
 
       <div class="about-section" id="about">
         <p>Ayden Taylor, known as Math, is a Creative Director and founder of UOX Studio. His work spans music, fashion, sports, and tech.</p>
       </div>
 
-      <section class="section">
-        <p class="section-label">Press:</p>
-        <ul class="client-projects">
-          <li><a href="https://hypebeast.com/2018/1/math-collage-artist-asap-mob" target="_blank" rel="noopener">Hypebeast</a></li>
-          <li><a href="https://youtu.be/NM-c_-aUGZA?si=gu0eAFkoE4Y1c2IK&t=303" target="_blank" rel="noopener">Complex</a></li>
-        </ul>
-      </section>
-
-      <section class="section">
-        <p class="section-label">Projects:</p>
-
-        <!-- SPORTS & MEDIA -->
-        <div class="category-group">
-          <div class="client-group">
-            <span class="client-name">Polymarket</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/42d48d56-d64d-481b-888d-1eb06e1e4612" target="_blank" rel="noopener">NYSE Takeover</a></li>
-              <li><a href="https://www.uox.studio/project/77c2f9d0-ff52-4105-a774-616ad1debaaf" target="_blank" rel="noopener">2024 U.S. Election Trailer</a></li>
-              <li><a href="https://x.com/Polymarket/status/1853861065056006535" target="_blank" rel="noopener">Swing State Odds: Road to 270</a></li>
-              <li><a href="https://x.com/Polymarket/status/1854285596438724867" target="_blank" rel="noopener">"Polymarket Called It First"</a></li>
-              <li><a href="https://x.com/Polymarket/status/1854286603902185492" target="_blank" rel="noopener">Kamala Harris Winner Visual</a></li>
-              <li><a href="https://www.uox.studio/project/2dd949b9-3eb0-4567-9f72-2361480404e5" target="_blank" rel="noopener">"We Were Right"</a></li>
-              <li><a href="https://www.uox.studio/project/a4635675-053b-41d9-9069-25a44ff93f6e" target="_blank" rel="noopener">Grok Partnership Video</a></li>
-              <li><a href="https://www.instagram.com/polymarket" target="_blank" rel="noopener">Social Media Design</a></li>
-              <li><a href="https://www.instagram.com/reel/DI98_5mxFAQ/" target="_blank" rel="noopener">Canadian Prime Minister Election</a></li>
-              <li><a href="https://x.com/Polymarket/status/1986514405882789983" target="_blank" rel="noopener">2025 NYC Mayor Prediction Billboard</a></li>
-              <li><a href="https://x.com/Polymarket/status/1880026871943033016" target="_blank" rel="noopener">SpaceX Visual</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">NBC Olympics</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/ba764f56-7dcc-4019-9914-68327ca5ddb0" target="_blank" rel="noopener">Noah Lyles Introduction Film</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">ESPN</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/c122ffff-94a1-433d-b4bf-e1f24ecfe23c" target="_blank" rel="noopener">NBA Is Back</a></li>
-              <li><a href="https://www.uox.studio/project/d71ae376-dd4e-4a9f-bdc2-4368882a3524" target="_blank" rel="noopener">NBA x ESPN — Celtics Finals</a></li>
-              <li><a href="https://www.uox.studio/project/84b870c6-3a7d-44d7-9239-5c2f828b3379" target="_blank" rel="noopener">UFC 300 on ESPN</a></li>
-              <li><a href="https://www.uox.studio/project/0dce1cb5-5c39-4389-b88c-20d8a33647b4" target="_blank" rel="noopener">Polymarket x UFC 309 Visualizer</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Bleacher Report</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/58ae2a02-349e-4d21-b964-9e3da010bbf7" target="_blank" rel="noopener">Sport History is Black History</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Amazon Prime</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/555b4222-0010-482f-9364-4c598c3246cd" target="_blank" rel="noopener">Coach Prime x NFL on Prime</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- MUSIC -->
-        <div class="category-group">
-          <div class="client-group">
-            <span class="client-name">Drake</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/reel/DKi4ThyuN9R/" target="_blank" rel="noopener">"Somebody Who Loves Me" Social Video</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Juice WRLD</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/913be19a-4395-494c-9019-2c716dce4957" target="_blank" rel="noopener">Fighting Demons Album Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Yeat</span>
-            <ul class="client-projects">
-              <li><a href="https://open.spotify.com/album/5cRZBMDWTNqtJnWGDlNHOV" target="_blank" rel="noopener">LYFË Album Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Sexyy Red</span>
-            <ul class="client-projects">
-              <li><a href="https://pitchfork.com/reviews/albums/sexyy-red-hood-hottest-princess/" target="_blank" rel="noopener">Hood Hottest Princess Series</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Tyla</span>
-            <ul class="client-projects">
-              <li><a href="https://www.rollingstone.com/music/music-news/tyla-wwp-mixtape-1235393626/" target="_blank" rel="noopener">WWP Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</span>
-            <ul class="client-projects">
-              <li><a href="https://x.com/awge/status/892438597097242624" target="_blank" rel="noopener">ASAP Rocky — AWGEST Social Content</a></li>
-              <li><a href="https://www.thehypemagazine.com/2017/08/25/aap-ferg-x-ski-mask-the-slump-god-iloveyouraunt/" target="_blank" rel="noopener">ASAP Ferg & Ski Mask — "ILoveYourAunt"</a></li>
-              <li><a href="https://www.instagram.com/p/BgrwgDRjZC8/" target="_blank" rel="noopener">ASAP Ferg — Social Media Design</a></li>
-              <li><a href="https://www.thefader.com/2017/07/31/zombamafoo-remix-hoodrich-pablo-juan-lil-uzi-vert" target="_blank" rel="noopener">ASAP Twelvyy — "Yea Yea Yea" Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Lil Tjay</span>
-            <ul class="client-projects">
-              <li><a href="https://www.revolt.tv/article/2021-03-19/57551/lil-tjay-polo-g-and-fivio-foreign-team-up-for-headshot" target="_blank" rel="noopener">"Headshot" ft. Polo G & Fivio Foreign</a></li>
-              <li><a href="https://www.hotnewhiphop.com/313860-lil-tjay-is-done-with-love-on-calling-my-phone-ft-6lack-new-song" target="_blank" rel="noopener">"Calling My Phone"</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">King Von</span>
-            <ul class="client-projects">
-              <li><a href="https://www.revolt.tv/article/2022-02-04/151275/king-von-21-savage-dont-play-that-single" target="_blank" rel="noopener">"Don't Play That" ft. 21 Savage</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Yung Bans</span>
-            <ul class="client-projects">
-              <li><a href="https://pitchfork.com/reviews/albums/yung-bans-vol-5/" target="_blank" rel="noopener">Vol. 5 & 6 Album Covers</a></li>
-              <li><a href="https://pitchfork.com/reviews/tracks/easter-pink/" target="_blank" rel="noopener">"Easter Pink" ft. Gunna</a></li>
-              <li><a href="https://soundcloud.com/yungbans/4tspoon" target="_blank" rel="noopener">"4T Spoon" ft. Playboi Carti</a></li>
-              <li><a href="https://www.instagram.com/p/B0hGsb4FngM/" target="_blank" rel="noopener">Misunderstood Times Square Billboard</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Young Thug</span>
-            <ul class="client-projects">
-              <li><a href="https://www.complex.com/music/a/fnr-tigg/young-thug-renames-tour-the-justin-bieber-big-tour" target="_blank" rel="noopener">Justin Bieber Tour Merch & Flyer Design</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Ella Mai</span>
-            <ul class="client-projects">
-              <li><a href="https://en.wikipedia.org/wiki/Boo%27d_Up" target="_blank" rel="noopener">"Boo'd Up" Platinum Plaque Design</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Usher</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/p/BWv1yAeji4P/" target="_blank" rel="noopener">Social Media Content</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">DJ Mustard</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/p/BZHgcdHnMKL/" target="_blank" rel="noopener">Long-Term Social Media Content</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Hoodrich Pablo Juan</span>
-            <ul class="client-projects">
-              <li><a href="https://hypebeast.com/2019/2/hoodrich-pablo-juan-young-thug-screaming-slatt-stream" target="_blank" rel="noopener">"Screaming Slatt" ft. Young Thug</a></li>
-              <li><a href="https://www.thefader.com/2017/07/31/zombamafoo-remix-hoodrich-pablo-juan-lil-uzi-vert" target="_blank" rel="noopener">"Zombamafoo" ft. Lil Uzi Vert</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Lil Gotit</span>
-            <ul class="client-projects">
-              <li><a href="https://genius.com/Lil-gotit-pop-my-shit-lyrics" target="_blank" rel="noopener">"Pop My Shit" Single Cover</a></li>
-              <li><a href="https://genius.com/Lil-gotit-what-it-was-lyrics" target="_blank" rel="noopener">"Pop My Shit (Remix)" ft. Lil Keed</a></li>
-              <li><a href="https://genius.com/Lil-gotit-what-it-was-lyrics" target="_blank" rel="noopener">"What It Was" ft. Future</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Money Man</span>
-            <ul class="client-projects">
-              <li><a href="https://www.hotnewhiphop.com/766315-money-man-purple-heart-review" target="_blank" rel="noopener">Purple Heart Album Cover</a></li>
-              <li><a href="https://music.apple.com/us/album/30-days/1846236922" target="_blank" rel="noopener">30 Days Album</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Digital Nas & Lil Yachty</span>
-            <ul class="client-projects">
-              <li><a href="https://www.hotnewhiphop.com/163094-digital-nas-and-lil-yachty-return-with-the-lost-files-2-ep-new-mixtape" target="_blank" rel="noopener">The Lost Files Series Covers</a></li>
-              <li><a href="https://open.spotify.com/track/7D4cQHNs5hHw4uizrUT694" target="_blank" rel="noopener">Lil Yachty — "Lil Boat" Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Jesse Jo Stark</span>
-            <ul class="client-projects">
-              <li><a href="https://www.youtube.com/watch?v=WXeWfr4lWsM" target="_blank" rel="noopener">"Patterns" Remix Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Madison Beer</span>
-            <ul class="client-projects">
-              <li><a href="https://store.madisonbeer.com/collections/reckless" target="_blank" rel="noopener">Reckless Merchandise</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Jay Critch & Rich the Kid</span>
-            <ul class="client-projects">
-              <li><a href="https://genius.com/Jay-critch-fashion-lyrics" target="_blank" rel="noopener">"Fashion" Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">6ixbuzz & 88Glam</span>
-            <ul class="client-projects">
-              <li><a href="https://www.youtube.com/watch?v=uJkADqdzDMY" target="_blank" rel="noopener">East to West Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">NgeeYL & Lil Uzi Vert</span>
-            <ul class="client-projects">
-              <li><a href="https://www.revolt.tv/article/2021-07-12/49450/lil-uzi-vert-hops-on-ngeeyls-off-white" target="_blank" rel="noopener">"Off-White" Single Cover</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Dvbbs</span>
-            <ul class="client-projects">
-              <li><a href="https://www.edm-lab.com/release/release-dvbbs-tinted-eyes/" target="_blank" rel="noopener">"Tinted Eyes" ft. Blackbear & 2 Chainz</a></li>
-              <li><a href="https://www.youtube.com/watch?v=N8DVRGq8nRQ" target="_blank" rel="noopener">"Torture of the Heart" ft. Nelly Furtado</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Sean Kingston</span>
-            <ul class="client-projects">
-              <li><a href="https://www.thehypemagazine.com/2021/05/21/sean-kingston-is-back-with-darkest-times/" target="_blank" rel="noopener">"Darkest Times" Single Cover</a></li>
-              <li><a href="https://www.youtube.com/watch?v=BhVRe-0d214" target="_blank" rel="noopener">"Love Is Wonderful" ft. Travis Barker</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Cody Ko</span>
-            <ul class="client-projects">
-              <li><a href="https://www.cultr.com/news/cody-ko-pays-homage-to-bop-it-game-with-latest-single/" target="_blank" rel="noopener">"Bop It" Single Cover</a></li>
-              <li><a href="https://www.instagram.com/p/CVTjOmkh5c7/" target="_blank" rel="noopener">Ko Merch — "Sugar High" Collection</a></li>
-              <li><a href="https://www.instagram.com/p/CSdUTI9H_Zl/" target="_blank" rel="noopener">Ko Merch — "Sweet Tooth" Collection</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- BRAND -->
-        <div class="category-group">
-          <div class="client-group">
-            <span class="client-name">Adidas Originals</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/p/BgKQXwDhJx_/" target="_blank" rel="noopener">Prophere Campaign</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Under Armour x AWGE</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/p/BqLco9NA4Yk/" target="_blank" rel="noopener">SRLO Sneaker Launch</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Deadly Doll x Chrome Hearts</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/720cf90f-e1a6-41c2-84dd-f82c2ee05588" target="_blank" rel="noopener">Release Video</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Venus Et Fleur</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/63458590-2c34-4500-a6d1-94d4a853fca0" target="_blank" rel="noopener">Valentine's Day 3D Campaign</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">LØCI</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/5b5e4f14-05ba-4d57-a724-0542ae1f568d" target="_blank" rel="noopener">LØCI x Nicki Minaj</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Flerish</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/dc0bc412-abe8-4eca-ab5b-6275894d135e" target="_blank" rel="noopener">Brand Bible & Packaging</a></li>
-              <li><a href="https://www.bevnet.com/pr/2025/03/12/flerish-hydration-partners-with-rolling-loud-for-the-2025-festival" target="_blank" rel="noopener">Rolling Loud Partnership</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Rolling Loud</span>
-            <ul class="client-projects">
-              <li><a href="https://www.facebook.com/RollingLoudFest/" target="_blank" rel="noopener">Los Angeles Merchandise Design</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Kyler Murray</span>
-            <ul class="client-projects">
-              <li><a href="#" target="_blank" rel="noopener">KM1 Merchandise Release</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Chito</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/2d91e7f3-58d7-44ba-a8f9-094ef01d8d4c" target="_blank" rel="noopener">Chito Home Release</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Crushed Tonic</span>
-            <ul class="client-projects">
-              <li><a href="https://crushedtonic.com/" target="_blank" rel="noopener">Social Media, Marketing & Packaging</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Empower Global</span>
-            <ul class="client-projects">
-              <li><a href="https://www.instagram.com/shopempower/" target="_blank" rel="noopener">Social Media Design Assets</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- TECH / PRODUCT -->
-        <div class="category-group">
-          <div class="client-group">
-            <span class="client-name">TikTok</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/1d504882-e573-4e09-867c-255c2f48a141" target="_blank" rel="noopener">Sizzle Reel</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Pendulum</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/df7a7401-d1c8-411c-b62f-6683c54b6cf2" target="_blank" rel="noopener">App UI/UX Design</a></li>
-            </ul>
-          </div>
-
-          <div class="client-group">
-            <span class="client-name">Reflect Orbital</span>
-            <ul class="client-projects">
-              <li><a href="https://www.uox.studio/project/0209442a-effd-4ce0-9f8c-ed5d68601b8c" target="_blank" rel="noopener">Product Showcase</a></li>
-            </ul>
-          </div>
-        </div>
-
+      <section class="section work">
+        <p class="section-label">Work:</p>
+        <div class="filters" role="group" aria-label="Filter by discipline"><button type="button" data-filter="All" aria-pressed="true">All (74)</button><button type="button" data-filter="Film &amp; 3D" aria-pressed="false">Film &amp; 3D (19)</button><button type="button" data-filter="Cover Art" aria-pressed="false">Cover Art (30)</button><button type="button" data-filter="Billboards &amp; OOH" aria-pressed="false">Billboards &amp; OOH (3)</button><button type="button" data-filter="Brands &amp; Campaigns" aria-pressed="false">Brands &amp; Campaigns (8)</button><button type="button" data-filter="Social" aria-pressed="false">Social (7)</button><button type="button" data-filter="Merch" aria-pressed="false">Merch (7)</button></div>
+        <table class="index">
+          <thead><tr><th class="n"><button type="button" data-sort="order" aria-sort="ascending">#</button></th><th><button type="button" data-sort="order">Project</button></th><th><button type="button" data-sort="client">Client</button></th><th><button type="button" data-sort="disc">Discipline</button></th></tr></thead>
+          <tbody>
+          <tr data-order="0" data-client="Drake" data-disc="Social"><td class="n">01</td><td class="p"><a href="https://www.instagram.com/reel/DKi4ThyuN9R/" target="_blank" rel="noopener">&quot;Somebody Who Loves Me&quot; Social Video</a></td><td class="c">Drake</td><td class="d">Social</td></tr>
+          <tr data-order="1" data-client="Juice WRLD" data-disc="Cover Art"><td class="n">02</td><td class="p"><a href="https://www.uox.studio/project/913be19a-4395-494c-9019-2c716dce4957" target="_blank" rel="noopener">Fighting Demons Album Cover</a></td><td class="c">Juice WRLD</td><td class="d">Cover Art</td></tr>
+          <tr data-order="2" data-client="Polymarket" data-disc="Billboards &amp; OOH"><td class="n">03</td><td class="p"><a href="https://www.uox.studio/project/42d48d56-d64d-481b-888d-1eb06e1e4612" target="_blank" rel="noopener">NYSE Takeover</a></td><td class="c">Polymarket</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="3" data-client="NBC Olympics" data-disc="Film &amp; 3D"><td class="n">04</td><td class="p"><a href="https://www.uox.studio/project/ba764f56-7dcc-4019-9914-68327ca5ddb0" target="_blank" rel="noopener">Noah Lyles Introduction Film</a></td><td class="c">NBC Olympics</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="4" data-client="Yeat" data-disc="Cover Art"><td class="n">05</td><td class="p"><a href="https://open.spotify.com/album/5cRZBMDWTNqtJnWGDlNHOV" target="_blank" rel="noopener">LYFË Album Cover</a></td><td class="c">Yeat</td><td class="d">Cover Art</td></tr>
+          <tr data-order="5" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">06</td><td class="p"><a href="https://www.uox.studio/project/c122ffff-94a1-433d-b4bf-e1f24ecfe23c" target="_blank" rel="noopener">NBA Is Back</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="6" data-client="Amazon Prime" data-disc="Film &amp; 3D"><td class="n">07</td><td class="p"><a href="https://www.uox.studio/project/555b4222-0010-482f-9364-4c598c3246cd" target="_blank" rel="noopener">Coach Prime x NFL on Prime</a></td><td class="c">Amazon Prime</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="7" data-client="Polymarket" data-disc="Billboards &amp; OOH"><td class="n">08</td><td class="p"><a href="https://x.com/Polymarket/status/1986514405882789983" target="_blank" rel="noopener">2025 NYC Mayor Prediction Billboard</a></td><td class="c">Polymarket</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="8" data-client="LØCI" data-disc="Brands &amp; Campaigns"><td class="n">09</td><td class="p"><a href="https://www.uox.studio/project/5b5e4f14-05ba-4d57-a724-0542ae1f568d" target="_blank" rel="noopener">LØCI x Nicki Minaj</a></td><td class="c">LØCI</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="9" data-client="Lil Tjay" data-disc="Cover Art"><td class="n">10</td><td class="p"><a href="https://www.hotnewhiphop.com/313860-lil-tjay-is-done-with-love-on-calling-my-phone-ft-6lack-new-song" target="_blank" rel="noopener">&quot;Calling My Phone&quot;</a></td><td class="c">Lil Tjay</td><td class="d">Cover Art</td></tr>
+          <tr data-order="10" data-client="Sexyy Red" data-disc="Cover Art"><td class="n">11</td><td class="p"><a href="https://pitchfork.com/reviews/albums/sexyy-red-hood-hottest-princess/" target="_blank" rel="noopener">Hood Hottest Princess Series</a></td><td class="c">Sexyy Red</td><td class="d">Cover Art</td></tr>
+          <tr data-order="11" data-client="Yung Bans" data-disc="Billboards &amp; OOH"><td class="n">12</td><td class="p"><a href="https://www.instagram.com/p/B0hGsb4FngM/" target="_blank" rel="noopener">Misunderstood Times Square Billboard</a></td><td class="c">Yung Bans</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="12" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">13</td><td class="p"><a href="https://www.uox.studio/project/77c2f9d0-ff52-4105-a774-616ad1debaaf" target="_blank" rel="noopener">2024 U.S. Election Trailer</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="13" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">14</td><td class="p"><a href="https://www.uox.studio/project/d71ae376-dd4e-4a9f-bdc2-4368882a3524" target="_blank" rel="noopener">NBA x ESPN — Celtics Finals</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="14" data-client="Tyla" data-disc="Cover Art"><td class="n">15</td><td class="p"><a href="https://www.rollingstone.com/music/music-news/tyla-wwp-mixtape-1235393626/" target="_blank" rel="noopener">WWP Single Cover</a></td><td class="c">Tyla</td><td class="d">Cover Art</td></tr>
+          <tr data-order="15" data-client="Lil Tjay" data-disc="Cover Art"><td class="n">16</td><td class="p"><a href="https://www.revolt.tv/article/2021-03-19/57551/lil-tjay-polo-g-and-fivio-foreign-team-up-for-headshot" target="_blank" rel="noopener">&quot;Headshot&quot; ft. Polo G &amp; Fivio Foreign</a></td><td class="c">Lil Tjay</td><td class="d">Cover Art</td></tr>
+          <tr data-order="16" data-client="King Von" data-disc="Cover Art"><td class="n">17</td><td class="p"><a href="https://www.revolt.tv/article/2022-02-04/151275/king-von-21-savage-dont-play-that-single" target="_blank" rel="noopener">&quot;Don&#x27;t Play That&quot; ft. 21 Savage</a></td><td class="c">King Von</td><td class="d">Cover Art</td></tr>
+          <tr data-order="17" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Social"><td class="n">18</td><td class="p"><a href="https://x.com/awge/status/892438597097242624" target="_blank" rel="noopener">ASAP Rocky — AWGEST Social Content</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Social</td></tr>
+          <tr data-order="18" data-client="TikTok" data-disc="Film &amp; 3D"><td class="n">19</td><td class="p"><a href="https://www.uox.studio/project/1d504882-e573-4e09-867c-255c2f48a141" target="_blank" rel="noopener">Sizzle Reel</a></td><td class="c">TikTok</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="19" data-client="Bleacher Report" data-disc="Film &amp; 3D"><td class="n">20</td><td class="p"><a href="https://www.uox.studio/project/58ae2a02-349e-4d21-b964-9e3da010bbf7" target="_blank" rel="noopener">Sport History is Black History</a></td><td class="c">Bleacher Report</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="20" data-client="Usher" data-disc="Social"><td class="n">21</td><td class="p"><a href="https://www.instagram.com/p/BWv1yAeji4P/" target="_blank" rel="noopener">Social Media Content</a></td><td class="c">Usher</td><td class="d">Social</td></tr>
+          <tr data-order="21" data-client="Adidas Originals" data-disc="Brands &amp; Campaigns"><td class="n">22</td><td class="p"><a href="https://www.instagram.com/p/BgKQXwDhJx_/" target="_blank" rel="noopener">Prophere Campaign</a></td><td class="c">Adidas Originals</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="22" data-client="Under Armour x AWGE" data-disc="Brands &amp; Campaigns"><td class="n">23</td><td class="p"><a href="https://www.instagram.com/p/BqLco9NA4Yk/" target="_blank" rel="noopener">SRLO Sneaker Launch</a></td><td class="c">Under Armour x AWGE</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="23" data-client="Young Thug" data-disc="Merch"><td class="n">24</td><td class="p"><a href="https://www.complex.com/music/a/fnr-tigg/young-thug-renames-tour-the-justin-bieber-big-tour" target="_blank" rel="noopener">Justin Bieber Tour Merch &amp; Flyer Design</a></td><td class="c">Young Thug</td><td class="d">Merch</td></tr>
+          <tr data-order="24" data-client="Ella Mai" data-disc="Merch"><td class="n">25</td><td class="p"><a href="https://en.wikipedia.org/wiki/Boo%27d_Up" target="_blank" rel="noopener">&quot;Boo&#x27;d Up&quot; Platinum Plaque Design</a></td><td class="c">Ella Mai</td><td class="d">Merch</td></tr>
+          <tr data-order="25" data-client="DJ Mustard" data-disc="Social"><td class="n">26</td><td class="p"><a href="https://www.instagram.com/p/BZHgcdHnMKL/" target="_blank" rel="noopener">Long-Term Social Media Content</a></td><td class="c">DJ Mustard</td><td class="d">Social</td></tr>
+          <tr data-order="26" data-client="Yung Bans" data-disc="Cover Art"><td class="n">27</td><td class="p"><a href="https://pitchfork.com/reviews/albums/yung-bans-vol-5/" target="_blank" rel="noopener">Vol. 5 &amp; 6 Album Covers</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="27" data-client="Digital Nas &amp; Lil Yachty" data-disc="Cover Art"><td class="n">28</td><td class="p"><a href="https://www.hotnewhiphop.com/163094-digital-nas-and-lil-yachty-return-with-the-lost-files-2-ep-new-mixtape" target="_blank" rel="noopener">The Lost Files Series Covers</a></td><td class="c">Digital Nas &amp; Lil Yachty</td><td class="d">Cover Art</td></tr>
+          <tr data-order="28" data-client="Madison Beer" data-disc="Merch"><td class="n">29</td><td class="p"><a href="https://store.madisonbeer.com/collections/reckless" target="_blank" rel="noopener">Reckless Merchandise</a></td><td class="c">Madison Beer</td><td class="d">Merch</td></tr>
+          <tr data-order="29" data-client="Rolling Loud" data-disc="Merch"><td class="n">30</td><td class="p"><a href="https://www.facebook.com/RollingLoudFest/" target="_blank" rel="noopener">Los Angeles Merchandise Design</a></td><td class="c">Rolling Loud</td><td class="d">Merch</td></tr>
+          <tr data-order="30" data-client="Kyler Murray" data-disc="Merch"><td class="n">31</td><td class="p"><a href="#" target="_blank" rel="noopener">KM1 Merchandise Release</a></td><td class="c">Kyler Murray</td><td class="d">Merch</td></tr>
+          <tr data-order="31" data-client="Hoodrich Pablo Juan" data-disc="Cover Art"><td class="n">32</td><td class="p"><a href="https://hypebeast.com/2019/2/hoodrich-pablo-juan-young-thug-screaming-slatt-stream" target="_blank" rel="noopener">&quot;Screaming Slatt&quot; ft. Young Thug</a></td><td class="c">Hoodrich Pablo Juan</td><td class="d">Cover Art</td></tr>
+          <tr data-order="32" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">33</td><td class="p"><a href="https://genius.com/Lil-gotit-pop-my-shit-lyrics" target="_blank" rel="noopener">&quot;Pop My Shit&quot; Single Cover</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="33" data-client="Money Man" data-disc="Cover Art"><td class="n">34</td><td class="p"><a href="https://www.hotnewhiphop.com/766315-money-man-purple-heart-review" target="_blank" rel="noopener">Purple Heart Album Cover</a></td><td class="c">Money Man</td><td class="d">Cover Art</td></tr>
+          <tr data-order="34" data-client="Jesse Jo Stark" data-disc="Cover Art"><td class="n">35</td><td class="p"><a href="https://www.youtube.com/watch?v=WXeWfr4lWsM" target="_blank" rel="noopener">&quot;Patterns&quot; Remix Single Cover</a></td><td class="c">Jesse Jo Stark</td><td class="d">Cover Art</td></tr>
+          <tr data-order="35" data-client="Jay Critch &amp; Rich the Kid" data-disc="Cover Art"><td class="n">36</td><td class="p"><a href="https://genius.com/Jay-critch-fashion-lyrics" target="_blank" rel="noopener">&quot;Fashion&quot; Single Cover</a></td><td class="c">Jay Critch &amp; Rich the Kid</td><td class="d">Cover Art</td></tr>
+          <tr data-order="36" data-client="6ixbuzz &amp; 88Glam" data-disc="Cover Art"><td class="n">37</td><td class="p"><a href="https://www.youtube.com/watch?v=uJkADqdzDMY" target="_blank" rel="noopener">East to West Single Cover</a></td><td class="c">6ixbuzz &amp; 88Glam</td><td class="d">Cover Art</td></tr>
+          <tr data-order="37" data-client="NgeeYL &amp; Lil Uzi Vert" data-disc="Cover Art"><td class="n">38</td><td class="p"><a href="https://www.revolt.tv/article/2021-07-12/49450/lil-uzi-vert-hops-on-ngeeyls-off-white" target="_blank" rel="noopener">&quot;Off-White&quot; Single Cover</a></td><td class="c">NgeeYL &amp; Lil Uzi Vert</td><td class="d">Cover Art</td></tr>
+          <tr data-order="38" data-client="Dvbbs" data-disc="Cover Art"><td class="n">39</td><td class="p"><a href="https://www.edm-lab.com/release/release-dvbbs-tinted-eyes/" target="_blank" rel="noopener">&quot;Tinted Eyes&quot; ft. Blackbear &amp; 2 Chainz</a></td><td class="c">Dvbbs</td><td class="d">Cover Art</td></tr>
+          <tr data-order="39" data-client="Sean Kingston" data-disc="Cover Art"><td class="n">40</td><td class="p"><a href="https://www.thehypemagazine.com/2021/05/21/sean-kingston-is-back-with-darkest-times/" target="_blank" rel="noopener">&quot;Darkest Times&quot; Single Cover</a></td><td class="c">Sean Kingston</td><td class="d">Cover Art</td></tr>
+          <tr data-order="40" data-client="Cody Ko" data-disc="Cover Art"><td class="n">41</td><td class="p"><a href="https://www.cultr.com/news/cody-ko-pays-homage-to-bop-it-game-with-latest-single/" target="_blank" rel="noopener">&quot;Bop It&quot; Single Cover</a></td><td class="c">Cody Ko</td><td class="d">Cover Art</td></tr>
+          <tr data-order="41" data-client="Deadly Doll x Chrome Hearts" data-disc="Film &amp; 3D"><td class="n">42</td><td class="p"><a href="https://www.uox.studio/project/720cf90f-e1a6-41c2-84dd-f82c2ee05588" target="_blank" rel="noopener">Release Video</a></td><td class="c">Deadly Doll x Chrome Hearts</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="42" data-client="Venus Et Fleur" data-disc="Film &amp; 3D"><td class="n">43</td><td class="p"><a href="https://www.uox.studio/project/63458590-2c34-4500-a6d1-94d4a853fca0" target="_blank" rel="noopener">Valentine&#x27;s Day 3D Campaign</a></td><td class="c">Venus Et Fleur</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="43" data-client="Flerish" data-disc="Brands &amp; Campaigns"><td class="n">44</td><td class="p"><a href="https://www.uox.studio/project/dc0bc412-abe8-4eca-ab5b-6275894d135e" target="_blank" rel="noopener">Brand Bible &amp; Packaging</a></td><td class="c">Flerish</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="44" data-client="Chito" data-disc="Brands &amp; Campaigns"><td class="n">45</td><td class="p"><a href="https://www.uox.studio/project/2d91e7f3-58d7-44ba-a8f9-094ef01d8d4c" target="_blank" rel="noopener">Chito Home Release</a></td><td class="c">Chito</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="45" data-client="Crushed Tonic" data-disc="Brands &amp; Campaigns"><td class="n">46</td><td class="p"><a href="https://crushedtonic.com/" target="_blank" rel="noopener">Social Media, Marketing &amp; Packaging</a></td><td class="c">Crushed Tonic</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="46" data-client="Empower Global" data-disc="Social"><td class="n">47</td><td class="p"><a href="https://www.instagram.com/shopempower/" target="_blank" rel="noopener">Social Media Design Assets</a></td><td class="c">Empower Global</td><td class="d">Social</td></tr>
+          <tr data-order="47" data-client="Pendulum" data-disc="Brands &amp; Campaigns"><td class="n">48</td><td class="p"><a href="https://www.uox.studio/project/df7a7401-d1c8-411c-b62f-6683c54b6cf2" target="_blank" rel="noopener">App UI/UX Design</a></td><td class="c">Pendulum</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="48" data-client="Reflect Orbital" data-disc="Film &amp; 3D"><td class="n">49</td><td class="p"><a href="https://www.uox.studio/project/0209442a-effd-4ce0-9f8c-ed5d68601b8c" target="_blank" rel="noopener">Product Showcase</a></td><td class="c">Reflect Orbital</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="49" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">50</td><td class="p"><a href="https://x.com/Polymarket/status/1853861065056006535" target="_blank" rel="noopener">Swing State Odds: Road to 270</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="50" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">51</td><td class="p"><a href="https://www.uox.studio/project/84b870c6-3a7d-44d7-9239-5c2f828b3379" target="_blank" rel="noopener">UFC 300 on ESPN</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="51" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Cover Art"><td class="n">52</td><td class="p"><a href="https://www.thehypemagazine.com/2017/08/25/aap-ferg-x-ski-mask-the-slump-god-iloveyouraunt/" target="_blank" rel="noopener">ASAP Ferg &amp; Ski Mask — &quot;ILoveYourAunt&quot;</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Cover Art</td></tr>
+          <tr data-order="52" data-client="Yung Bans" data-disc="Cover Art"><td class="n">53</td><td class="p"><a href="https://pitchfork.com/reviews/tracks/easter-pink/" target="_blank" rel="noopener">&quot;Easter Pink&quot; ft. Gunna</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="53" data-client="Digital Nas &amp; Lil Yachty" data-disc="Cover Art"><td class="n">54</td><td class="p"><a href="https://open.spotify.com/track/7D4cQHNs5hHw4uizrUT694" target="_blank" rel="noopener">Lil Yachty — &quot;Lil Boat&quot; Single Cover</a></td><td class="c">Digital Nas &amp; Lil Yachty</td><td class="d">Cover Art</td></tr>
+          <tr data-order="54" data-client="Hoodrich Pablo Juan" data-disc="Cover Art"><td class="n">55</td><td class="p"><a href="https://www.thefader.com/2017/07/31/zombamafoo-remix-hoodrich-pablo-juan-lil-uzi-vert" target="_blank" rel="noopener">&quot;Zombamafoo&quot; ft. Lil Uzi Vert</a></td><td class="c">Hoodrich Pablo Juan</td><td class="d">Cover Art</td></tr>
+          <tr data-order="55" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">56</td><td class="p"><a href="https://genius.com/Lil-gotit-what-it-was-lyrics" target="_blank" rel="noopener">&quot;Pop My Shit (Remix)&quot; ft. Lil Keed</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="56" data-client="Money Man" data-disc="Cover Art"><td class="n">57</td><td class="p"><a href="https://music.apple.com/us/album/30-days/1846236922" target="_blank" rel="noopener">30 Days Album</a></td><td class="c">Money Man</td><td class="d">Cover Art</td></tr>
+          <tr data-order="57" data-client="Dvbbs" data-disc="Cover Art"><td class="n">58</td><td class="p"><a href="https://www.youtube.com/watch?v=N8DVRGq8nRQ" target="_blank" rel="noopener">&quot;Torture of the Heart&quot; ft. Nelly Furtado</a></td><td class="c">Dvbbs</td><td class="d">Cover Art</td></tr>
+          <tr data-order="58" data-client="Sean Kingston" data-disc="Cover Art"><td class="n">59</td><td class="p"><a href="https://www.youtube.com/watch?v=BhVRe-0d214" target="_blank" rel="noopener">&quot;Love Is Wonderful&quot; ft. Travis Barker</a></td><td class="c">Sean Kingston</td><td class="d">Cover Art</td></tr>
+          <tr data-order="59" data-client="Cody Ko" data-disc="Merch"><td class="n">60</td><td class="p"><a href="https://www.instagram.com/p/CVTjOmkh5c7/" target="_blank" rel="noopener">Ko Merch — &quot;Sugar High&quot; Collection</a></td><td class="c">Cody Ko</td><td class="d">Merch</td></tr>
+          <tr data-order="60" data-client="Flerish" data-disc="Brands &amp; Campaigns"><td class="n">61</td><td class="p"><a href="https://www.bevnet.com/pr/2025/03/12/flerish-hydration-partners-with-rolling-loud-for-the-2025-festival" target="_blank" rel="noopener">Rolling Loud Partnership</a></td><td class="c">Flerish</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="61" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">62</td><td class="p"><a href="https://x.com/Polymarket/status/1854285596438724867" target="_blank" rel="noopener">&quot;Polymarket Called It First&quot;</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="62" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">63</td><td class="p"><a href="https://www.uox.studio/project/0dce1cb5-5c39-4389-b88c-20d8a33647b4" target="_blank" rel="noopener">Polymarket x UFC 309 Visualizer</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="63" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Social"><td class="n">64</td><td class="p"><a href="https://www.instagram.com/p/BgrwgDRjZC8/" target="_blank" rel="noopener">ASAP Ferg — Social Media Design</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Social</td></tr>
+          <tr data-order="64" data-client="Yung Bans" data-disc="Cover Art"><td class="n">65</td><td class="p"><a href="https://soundcloud.com/yungbans/4tspoon" target="_blank" rel="noopener">&quot;4T Spoon&quot; ft. Playboi Carti</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="65" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">66</td><td class="p"><a href="https://genius.com/Lil-gotit-what-it-was-lyrics" target="_blank" rel="noopener">&quot;What It Was&quot; ft. Future</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="66" data-client="Cody Ko" data-disc="Merch"><td class="n">67</td><td class="p"><a href="https://www.instagram.com/p/CSdUTI9H_Zl/" target="_blank" rel="noopener">Ko Merch — &quot;Sweet Tooth&quot; Collection</a></td><td class="c">Cody Ko</td><td class="d">Merch</td></tr>
+          <tr data-order="67" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">68</td><td class="p"><a href="https://x.com/Polymarket/status/1854286603902185492" target="_blank" rel="noopener">Kamala Harris Winner Visual</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="68" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Cover Art"><td class="n">69</td><td class="p"><a href="https://www.thefader.com/2017/07/31/zombamafoo-remix-hoodrich-pablo-juan-lil-uzi-vert" target="_blank" rel="noopener">ASAP Twelvyy — &quot;Yea Yea Yea&quot; Single Cover</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Cover Art</td></tr>
+          <tr data-order="69" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">70</td><td class="p"><a href="https://www.uox.studio/project/2dd949b9-3eb0-4567-9f72-2361480404e5" target="_blank" rel="noopener">&quot;We Were Right&quot;</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="70" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">71</td><td class="p"><a href="https://www.uox.studio/project/a4635675-053b-41d9-9069-25a44ff93f6e" target="_blank" rel="noopener">Grok Partnership Video</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="71" data-client="Polymarket" data-disc="Social"><td class="n">72</td><td class="p"><a href="https://www.instagram.com/polymarket" target="_blank" rel="noopener">Social Media Design</a></td><td class="c">Polymarket</td><td class="d">Social</td></tr>
+          <tr data-order="72" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">73</td><td class="p"><a href="https://www.instagram.com/reel/DI98_5mxFAQ/" target="_blank" rel="noopener">Canadian Prime Minister Election</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="73" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">74</td><td class="p"><a href="https://x.com/Polymarket/status/1880026871943033016" target="_blank" rel="noopener">SpaceX Visual</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          </tbody>
+        </table>
       </section>
 
       <section class="section">
@@ -550,7 +297,8 @@
     function spawnCard(url, ogImg, title, isLight) {
       var size = SIZES[Math.floor(Math.random() * SIZES.length)];
       var margin = 40;
-      var colEdge = 660;
+      var pageEl = document.querySelector('.page');
+      var colEdge = pageEl ? Math.round(pageEl.getBoundingClientRect().right) + 40 : 660;
       var maxX = window.innerWidth - size.w - margin;
       var maxY = window.innerHeight - size.h - margin;
 
@@ -558,7 +306,7 @@
       if (maxX > colEdge) {
         x = randomBetween(colEdge, maxX);
       } else {
-        x = randomBetween(colEdge, Math.max(colEdge, maxX));
+        x = Math.max(margin, maxX);
       }
       var y = randomBetween(margin, Math.max(margin, maxY));
 
@@ -718,7 +466,36 @@
       spawnCard(url, muxThumb || null, title, isLight);
     }
 
-    document.querySelectorAll('.client-projects a, .employer-link a').forEach(function(a) {
+
+    // Work index: filter by discipline, sort by column
+    (function() {
+      var tbody = document.querySelector('.index tbody');
+      if (!tbody) return;
+      var rows = Array.prototype.slice.call(tbody.rows);
+      var DISC = ['Film & 3D','Cover Art','Billboards & OOH','Brands & Campaigns','Social','Merch'];
+      var state = { filter: 'All', sort: 'order' };
+      function apply() {
+        var list = rows.slice();
+        if (state.sort === 'client') list.sort(function(a, b) { return a.dataset.client.localeCompare(b.dataset.client) || a.dataset.order - b.dataset.order; });
+        else if (state.sort === 'disc') list.sort(function(a, b) { return DISC.indexOf(a.dataset.disc) - DISC.indexOf(b.dataset.disc) || a.dataset.order - b.dataset.order; });
+        else list.sort(function(a, b) { return a.dataset.order - b.dataset.order; });
+        var n = 0;
+        list.forEach(function(r) {
+          var show = state.filter === 'All' || r.dataset.disc === state.filter;
+          r.hidden = !show;
+          if (show) r.cells[0].textContent = String(++n).padStart(2, '0');
+          tbody.appendChild(r);
+        });
+        document.querySelectorAll('[data-filter]').forEach(function(b) { b.setAttribute('aria-pressed', b.dataset.filter === state.filter); });
+        document.querySelectorAll('[data-sort]').forEach(function(b) {
+          if (b.dataset.sort === state.sort && b.textContent !== 'Project') b.setAttribute('aria-sort', 'ascending'); else b.removeAttribute('aria-sort');
+        });
+      }
+      document.querySelectorAll('[data-filter]').forEach(function(b) { b.addEventListener('click', function() { state.filter = b.dataset.filter; apply(); }); });
+      document.querySelectorAll('[data-sort]').forEach(function(b) { b.addEventListener('click', function() { state.sort = b.dataset.sort; apply(); }); });
+    })();
+
+    document.querySelectorAll('.index a, .client-projects a, .employer-link a, .press-line a').forEach(function(a) {
       var url = a.href;
       if (!url || url.endsWith('#')) return;
       // IG/X pages have no readable preview — only attach a card when we have our own thumbnail
