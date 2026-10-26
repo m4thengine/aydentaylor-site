@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="description" content="Ayden Taylor, known as Math, is a Creative Director and founder of UOX Studio. Work spanning music, fashion, sports, and tech." />
+  <meta name="keywords" content="Ayden Taylor, Math, Creative Director, UOX Studio, Math247, mathsgallery" />
+  <meta property="og:title" content="Ayden Taylor — Creative Director" />
+  <meta property="og:description" content="Ayden Taylor, known as Math, is a Creative Director and founder of UOX Studio." />
+  <meta property="og:url" content="https://aydentaylor.com/" />
+  <meta property="og:type" content="profile" />
+  <meta property="og:site_name" content="Ayden Taylor" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Ayden Taylor — Creative Director" />
+  <meta name="twitter:description" content="Ayden Taylor, known as Math, is a Creative Director and founder of UOX Studio." />
+  
+  <link rel="icon" href="/favicon.ico" sizes="any" />
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Ayden Taylor","alternateName":"Math","jobTitle":"Creative Director","worksFor":{"@type":"Organization","name":"UOX Studio","url":"https://www.uox.studio"},"url":"https://aydentaylor.com/","image":"https://aydentaylor.com/icon-512.png","sameAs":["https://www.linkedin.com/in/aydenwtaylor/","https://www.instagram.com/math247","https://www.instagram.com/mathsgallery","https://www.instagram.com/uoxstudio","https://www.uox.studio"]}</script>
+  <title>Ayden Taylor — Creative Director</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #fff;
+      color: #000;
+      font-family: 'Times New Roman', Times, serif;
+      font-size: 16px;
+      padding: 20px 20px 60px 20px;
+      overflow-x: hidden;
+    }
+
+    .page { max-width: 600px; }
+
+    .name { font-size: 2.6em; font-weight: bold; line-height: 1.1; margin-bottom: 4px; }
+    .role { font-size: 1em; font-weight: bold; }
+    .employer-link { font-size: 1em; }
+
+    .section { margin-top: 1.2em; }
+    .section-label { font-size: 1em; font-weight: bold; margin-bottom: 0; }
+
+    /* Category group */
+    .category-group { margin-top: 1.2em; }
+    .category-label {
+      font-size: 1em;
+      font-weight: bold;
+      color: #000;
+      line-height: 1.6;
+      margin-bottom: 0.1em;
+    }
+
+    /* Client group */
+    .client-group { margin-top: 0.2em; }
+    .client-name {
+      font-size: 1em;
+      font-weight: bold;
+      color: #000;
+      line-height: 1.6;
+      cursor: default;
+    }
+
+    /* Monospace project links */
+    .client-projects { list-style: none; padding-left: 1em; }
+    .client-projects li { line-height: 1.6; font-family: 'Courier New', Courier, monospace; font-size: 0.85em; }
+
+    a { color: #1155cc; text-decoration: underline; }
+    a:hover { color: #0b3d91; }
+
+    /* About toggle */
+    .about-link {
+      position: fixed; top: 20px; right: 20px;
+      font-size: 0.85em; color: #000; text-decoration: none;
+      font-family: 'Courier New', Courier, monospace; z-index: 100;
+      letter-spacing: 0.02em;
+    }
+    .about-link:hover { text-decoration: underline; }
+
+    .about-section { display: none; margin-top: 1.2em; }
+    .about-section.visible { display: block; }
+    .about-section p { font-size: 1em; line-height: 1.6; }
+
+    /* Cursor readout */
+    #cursor-readout {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.7em;
+      color: #aaa;
+      letter-spacing: 0.08em;
+      pointer-events: none;
+      z-index: 1000;
+      user-select: none;
+    }
+
+    /* Ghost cards */
+    .ghost-card {
+      position: fixed;
+      pointer-events: none;
+      z-index: 500;
+      background: #111;
+      overflow: hidden;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .ghost-card.light-bg {
+      background: #fff;
+    }
+
+    .ghost-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      opacity: 1;
+    }
+
+    /* Grain overlay on ghost cards */
+    .ghost-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      background-size: 160px 160px;
+      opacity: 0.06;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ghost-card.visible { opacity: 1; }
+    .ghost-card.fading { opacity: 0; transition: opacity 1.4s ease; }
+    /* Work index */
+    .page.wide { max-width: 860px; }
+    .press-line { margin-top: 0.5em; }
+    .filters { font-family: 'Courier New', Courier, monospace; font-size: 0.8em; display: flex; flex-wrap: wrap; gap: 4px 14px; margin: 0.5em 0 1em; }
+    .filters button, .index th button { font: inherit; color: #8a8a8f; background: none; border: 0; padding: 0; cursor: pointer; }
+    .filters button[aria-pressed="true"], .index th button[aria-sort] { color: #000; }
+    .filters button[aria-pressed="true"] { text-decoration: underline; }
+    .index { width: 100%; border-collapse: collapse; font-family: 'Courier New', Courier, monospace; font-size: 0.85em; }
+    .index th { text-align: left; font-weight: normal; padding: 0 16px 6px 0; border-bottom: 1px solid #000; white-space: nowrap; }
+    .index td { padding: 5px 16px 5px 0; border-bottom: 1px solid #e6e6ea; vertical-align: top; line-height: 1.4; }
+    .index td.n { color: #8a8a8f; width: 2.5em; font-variant-numeric: tabular-nums; }
+    .index td.c { color: #000; }
+    .index td.d { color: #8a8a8f; white-space: nowrap; }
+    .index tr[hidden] { display: none; }
+    .index tbody tr { cursor: pointer; }
+    .index tbody tr { transition: background-color .12s ease; }
+    .index tbody tr:hover, .index tbody tr.is-active { background: #f3f3f5; }
+    .index tbody tr:hover td.p a, .index tbody tr.is-active td.p a { color: #0b3d91; }
+    /* Mobile scroll preview */
+    #m-preview { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: 42vw; max-width: 230px; aspect-ratio: 1 / 1; background: #111; z-index: 600; opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease; pointer-events: none; overflow: hidden; }
+    #m-preview.light-bg { background: #fff; outline: 1px solid #e6e6ea; }
+    #m-preview.on { opacity: 1; transform: none; }
+    #m-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .2s ease; }
+    #m-preview img.show { opacity: 1; }
+    #m-preview::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 160px; opacity: .06; pointer-events: none; }
+    @media (hover: none) { #cursor-readout { display: none; } .about-link { background: #fff; padding: 2px 6px; margin: -2px -6px; } }
+    button:focus-visible { outline: 2px solid #1155cc; outline-offset: 2px; }
+    @media (max-width: 640px) {
+      .index thead { display: none; }
+      .index, .index tbody, .index tr, .index td { display: block; width: 100%; }
+      .index tr { padding: 8px 0; border-bottom: 1px solid #e6e6ea; }
+      .index tr[hidden] { display: none; }
+      .index td { border: 0; padding: 0; }
+      .index td.n { display: none; }
+      .index td.c, .index td.d { display: inline; width: auto; font-size: 0.95em; }
+      .index td.c::after { content: " \00B7  "; color: #8a8a8f; }
+    }
+  </style>
+</head>
+<body>
+
+  <a href="#" class="about-link" id="about-toggle" onclick="toggleAbout(event)">[+] about</a>
+  <div id="cursor-readout">X: 000 &nbsp; Y: 000</div>
+
+  <div class="page wide">
+    <main>
+      <h1 class="name">Ayden Taylor</h1>
+      <p class="role">Creative Director</p>
+      <p class="employer-link">@ <a href="https://www.uox.studio" target="_blank" rel="noopener">UOX STUDIO</a></p>
+      <p class="press-line">Featured in <a href="https://hypebeast.com/2018/1/math-collage-artist-asap-mob" target="_blank" rel="noopener">Hypebeast</a> and <a href="https://youtu.be/NM-c_-aUGZA?si=gu0eAFkoE4Y1c2IK&t=303" target="_blank" rel="noopener">Complex</a></p>
+
+      <div class="about-section" id="about">
+        <p>Ayden Taylor, known as Math, is a Creative Director and founder of UOX Studio. His work spans music, fashion, sports, and tech.</p>
+      </div>
+
+      <section class="section work">
+        <p class="section-label">Work:</p>
+        <div class="filters" role="group" aria-label="Filter by discipline"><button type="button" data-filter="All" aria-pressed="true">All (90)</button><button type="button" data-filter="Film &amp; 3D" aria-pressed="false">Film &amp; 3D (21)</button><button type="button" data-filter="Cover Art" aria-pressed="false">Cover Art (35)</button><button type="button" data-filter="Billboards &amp; OOH" aria-pressed="false">Billboards &amp; OOH (3)</button><button type="button" data-filter="Brands &amp; Campaigns" aria-pressed="false">Brands &amp; Campaigns (11)</button><button type="button" data-filter="Social" aria-pressed="false">Social (8)</button><button type="button" data-filter="Merch" aria-pressed="false">Merch (12)</button></div>
+        <table class="index">
+          <thead><tr><th class="n"><button type="button" data-sort="order" aria-sort="ascending">#</button></th><th><button type="button" data-sort="order">Project</button></th><th><button type="button" data-sort="client">Client</button></th><th><button type="button" data-sort="disc">Discipline</button></th></tr></thead>
+          <tbody>
+          <tr data-order="0" data-client="Drake" data-disc="Social"><td class="n">01</td><td class="p"><a href="https://www.instagram.com/reel/DKi4ThyuN9R/" target="_blank" rel="noopener">&quot;Somebody Who Loves Me&quot; Social Video</a></td><td class="c">Drake</td><td class="d">Social</td></tr>
+          <tr data-order="1" data-client="Juice WRLD" data-disc="Cover Art"><td class="n">02</td><td class="p"><a href="https://www.uox.studio/project/913be19a-4395-494c-9019-2c716dce4957" target="_blank" rel="noopener">Fighting Demons Album Cover</a></td><td class="c">Juice WRLD</td><td class="d">Cover Art</td></tr>
+          <tr data-order="2" data-client="Polymarket" data-disc="Billboards &amp; OOH"><td class="n">03</td><td class="p"><a href="https://www.uox.studio/project/42d48d56-d64d-481b-888d-1eb06e1e4612" target="_blank" rel="noopener">NYSE Takeover</a></td><td class="c">Polymarket</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="3" data-client="NBC Olympics" data-disc="Film &amp; 3D"><td class="n">04</td><td class="p"><a href="https://www.uox.studio/project/ba764f56-7dcc-4019-9914-68327ca5ddb0" target="_blank" rel="noopener">Noah Lyles Introduction Film</a></td><td class="c">NBC Olympics</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="4" data-client="Yeat" data-disc="Cover Art"><td class="n">05</td><td class="p"><a href="https://open.spotify.com/album/5cRZBMDWTNqtJnWGDlNHOV" target="_blank" rel="noopener">LYFË Album Cover</a></td><td class="c">Yeat</td><td class="d">Cover Art</td></tr>
+          <tr data-order="5" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">06</td><td class="p"><a href="https://www.uox.studio/project/c122ffff-94a1-433d-b4bf-e1f24ecfe23c" target="_blank" rel="noopener">NBA Is Back</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="6" data-client="Amazon Prime" data-disc="Film &amp; 3D"><td class="n">07</td><td class="p"><a href="https://www.uox.studio/project/555b4222-0010-482f-9364-4c598c3246cd" target="_blank" rel="noopener">Coach Prime x NFL on Prime</a></td><td class="c">Amazon Prime</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="7" data-client="Polymarket" data-disc="Billboards &amp; OOH"><td class="n">08</td><td class="p"><a href="https://x.com/Polymarket/status/1986514405882789983" target="_blank" rel="noopener">2025 NYC Mayor Prediction Billboard</a></td><td class="c">Polymarket</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="8" data-client="LØCI" data-disc="Brands &amp; Campaigns"><td class="n">09</td><td class="p"><a href="https://www.uox.studio/project/5b5e4f14-05ba-4d57-a724-0542ae1f568d" target="_blank" rel="noopener">LØCI x Nicki Minaj</a></td><td class="c">LØCI</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="9" data-client="Lil Tjay" data-disc="Cover Art"><td class="n">10</td><td class="p"><a href="https://www.hotnewhiphop.com/313860-lil-tjay-is-done-with-love-on-calling-my-phone-ft-6lack-new-song" target="_blank" rel="noopener">&quot;Calling My Phone&quot;</a></td><td class="c">Lil Tjay</td><td class="d">Cover Art</td></tr>
+          <tr data-order="10" data-client="Sexyy Red" data-disc="Cover Art"><td class="n">11</td><td class="p"><a href="https://pitchfork.com/reviews/albums/sexyy-red-hood-hottest-princess/" target="_blank" rel="noopener">Hood Hottest Princess Series</a></td><td class="c">Sexyy Red</td><td class="d">Cover Art</td></tr>
+          <tr data-order="11" data-client="Yung Bans" data-disc="Billboards &amp; OOH"><td class="n">12</td><td class="p"><a href="https://www.instagram.com/p/B0hGsb4FngM/" target="_blank" rel="noopener">Misunderstood Times Square Billboard</a></td><td class="c">Yung Bans</td><td class="d">Billboards &amp; OOH</td></tr>
+          <tr data-order="12" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">13</td><td class="p"><a href="https://www.uox.studio/project/77c2f9d0-ff52-4105-a774-616ad1debaaf" target="_blank" rel="noopener">2024 U.S. Election Trailer</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="13" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">14</td><td class="p"><a href="https://www.uox.studio/project/d71ae376-dd4e-4a9f-bdc2-4368882a3524" target="_blank" rel="noopener">NBA x ESPN — Celtics Finals</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="14" data-client="Tyla" data-disc="Cover Art"><td class="n">15</td><td class="p"><a href="https://www.rollingstone.com/music/music-news/tyla-wwp-mixtape-1235393626/" target="_blank" rel="noopener">WWP Single Cover</a></td><td class="c">Tyla</td><td class="d">Cover Art</td></tr>
+          <tr data-order="15" data-client="Lil Tjay" data-disc="Cover Art"><td class="n">16</td><td class="p"><a href="https://www.revolt.tv/article/2021-03-19/57551/lil-tjay-polo-g-and-fivio-foreign-team-up-for-headshot" target="_blank" rel="noopener">&quot;Headshot&quot; ft. Polo G &amp; Fivio Foreign</a></td><td class="c">Lil Tjay</td><td class="d">Cover Art</td></tr>
+          <tr data-order="16" data-client="King Von" data-disc="Cover Art"><td class="n">17</td><td class="p"><a href="https://www.revolt.tv/article/2022-02-04/151275/king-von-21-savage-dont-play-that-single" target="_blank" rel="noopener">&quot;Don&#x27;t Play That&quot; ft. 21 Savage</a></td><td class="c">King Von</td><td class="d">Cover Art</td></tr>
+          <tr data-order="17" data-client="AWGE" data-disc="Social"><td class="n">18</td><td class="p"><a href="https://x.com/awge/status/892438597097242624" target="_blank" rel="noopener">ASAP Rocky — AWGEST Social Content</a></td><td class="c">AWGE</td><td class="d">Social</td></tr>
+          <tr data-order="18" data-client="TikTok" data-disc="Film &amp; 3D"><td class="n">19</td><td class="p"><a href="https://www.uox.studio/project/1d504882-e573-4e09-867c-255c2f48a141" target="_blank" rel="noopener">Sizzle Reel</a></td><td class="c">TikTok</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="19" data-client="Bleacher Report" data-disc="Film &amp; 3D"><td class="n">20</td><td class="p"><a href="https://www.uox.studio/project/58ae2a02-349e-4d21-b964-9e3da010bbf7" target="_blank" rel="noopener">Sport History is Black History</a></td><td class="c">Bleacher Report</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="20" data-client="Usher" data-disc="Social"><td class="n">21</td><td class="p"><a href="https://www.instagram.com/p/BWv1yAeji4P/" target="_blank" rel="noopener">Social Media Content</a></td><td class="c">Usher</td><td class="d">Social</td></tr>
+          <tr data-order="21" data-client="Adidas Originals" data-disc="Brands &amp; Campaigns"><td class="n">22</td><td class="p"><a href="https://www.instagram.com/p/BgKQXwDhJx_/" target="_blank" rel="noopener">Prophere Campaign</a></td><td class="c">Adidas Originals</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="22" data-client="Under Armour x AWGE" data-disc="Brands &amp; Campaigns"><td class="n">23</td><td class="p"><a href="https://www.instagram.com/p/BqLco9NA4Yk/" target="_blank" rel="noopener">SRLO Sneaker Launch</a></td><td class="c">Under Armour x AWGE</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="23" data-client="Young Thug" data-disc="Merch"><td class="n">24</td><td class="p"><a href="https://www.instagram.com/p/B5-8GTWlou4/" target="_blank" rel="noopener">Justin Bieber Tour Merch &amp; Flyer Design</a></td><td class="c">Young Thug</td><td class="d">Merch</td></tr>
+          <tr data-order="24" data-client="Ella Mai" data-disc="Merch"><td class="n">25</td><td class="p"><a href="https://en.wikipedia.org/wiki/Boo%27d_Up" target="_blank" rel="noopener">&quot;Boo&#x27;d Up&quot; Platinum Plaque Design</a></td><td class="c">Ella Mai</td><td class="d">Merch</td></tr>
+          <tr data-order="25" data-client="DJ Mustard" data-disc="Social"><td class="n">26</td><td class="p"><a href="https://www.instagram.com/p/BgrwgDRjZC8/" target="_blank" rel="noopener">Long-Term Social Media Content</a></td><td class="c">DJ Mustard</td><td class="d">Social</td></tr>
+          <tr data-order="26" data-client="Yung Bans" data-disc="Cover Art"><td class="n">27</td><td class="p"><a href="https://www.instagram.com/p/BkQh-NOBvI2/" target="_blank" rel="noopener">Vol. 5 &amp; 6 Album Covers</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="27" data-client="Digital Nas &amp; Lil Yachty" data-disc="Cover Art"><td class="n">28</td><td class="p"><a href="https://www.instagram.com/p/BwJiDf0F65M/" target="_blank" rel="noopener">The Lost Files Series Covers</a></td><td class="c">Digital Nas &amp; Lil Yachty</td><td class="d">Cover Art</td></tr>
+          <tr data-order="28" data-client="Rolling Loud" data-disc="Merch"><td class="n">29</td><td class="p"><a href="https://www.instagram.com/p/B4tMfJiFyyU/" target="_blank" rel="noopener">Los Angeles Merchandise Design</a></td><td class="c">Rolling Loud</td><td class="d">Merch</td></tr>
+          <tr data-order="29" data-client="Kyler Murray" data-disc="Merch"><td class="n">30</td><td class="p"><a href="https://www.instagram.com/p/CIMlNESh4T8/" target="_blank" rel="noopener">KM1 Merchandise Release</a></td><td class="c">Kyler Murray</td><td class="d">Merch</td></tr>
+          <tr data-order="30" data-client="Hoodrich Pablo Juan" data-disc="Cover Art"><td class="n">31</td><td class="p"><a href="https://www.instagram.com/p/BuITsOylpH2/" target="_blank" rel="noopener">&quot;Screaming Slatt&quot; ft. Young Thug</a></td><td class="c">Hoodrich Pablo Juan</td><td class="d">Cover Art</td></tr>
+          <tr data-order="31" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">32</td><td class="p"><a href="https://www.instagram.com/p/BzY6ufdFsa3/" target="_blank" rel="noopener">&quot;Pop My Shit&quot; Single Cover</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="32" data-client="Money Man" data-disc="Cover Art"><td class="n">33</td><td class="p"><a href="https://www.hotnewhiphop.com/766315-money-man-purple-heart-review" target="_blank" rel="noopener">Purple Heart Album Cover</a></td><td class="c">Money Man</td><td class="d">Cover Art</td></tr>
+          <tr data-order="33" data-client="Jesse Jo Stark" data-disc="Cover Art"><td class="n">34</td><td class="p"><a href="https://www.youtube.com/watch?v=WXeWfr4lWsM" target="_blank" rel="noopener">&quot;Patterns&quot; Remix Single Cover</a></td><td class="c">Jesse Jo Stark</td><td class="d">Cover Art</td></tr>
+          <tr data-order="34" data-client="Jay Critch &amp; Rich the Kid" data-disc="Cover Art"><td class="n">35</td><td class="p"><a href="https://www.instagram.com/p/Ba9zq1hj-zg/" target="_blank" rel="noopener">&quot;Fashion&quot; Single Cover</a></td><td class="c">Jay Critch &amp; Rich the Kid</td><td class="d">Cover Art</td></tr>
+          <tr data-order="35" data-client="6ixbuzz &amp; 88Glam" data-disc="Cover Art"><td class="n">36</td><td class="p"><a href="https://www.youtube.com/watch?v=uJkADqdzDMY" target="_blank" rel="noopener">East to West Single Cover</a></td><td class="c">6ixbuzz &amp; 88Glam</td><td class="d">Cover Art</td></tr>
+          <tr data-order="36" data-client="NgeeYL &amp; Lil Uzi Vert" data-disc="Cover Art"><td class="n">37</td><td class="p"><a href="https://www.revolt.tv/article/2021-07-12/49450/lil-uzi-vert-hops-on-ngeeyls-off-white" target="_blank" rel="noopener">&quot;Off-White&quot; Single Cover</a></td><td class="c">NgeeYL &amp; Lil Uzi Vert</td><td class="d">Cover Art</td></tr>
+          <tr data-order="37" data-client="Dvbbs" data-disc="Cover Art"><td class="n">38</td><td class="p"><a href="https://www.instagram.com/p/CBBrpn5hTJG/" target="_blank" rel="noopener">&quot;Tinted Eyes&quot; ft. blackbear &amp; 24kGoldn</a></td><td class="c">Dvbbs</td><td class="d">Cover Art</td></tr>
+          <tr data-order="38" data-client="Sean Kingston" data-disc="Cover Art"><td class="n">39</td><td class="p"><a href="https://www.thehypemagazine.com/2021/05/21/sean-kingston-is-back-with-darkest-times/" target="_blank" rel="noopener">&quot;Darkest Times&quot; Single Cover</a></td><td class="c">Sean Kingston</td><td class="d">Cover Art</td></tr>
+          <tr data-order="39" data-client="Deadly Doll x Chrome Hearts" data-disc="Film &amp; 3D"><td class="n">40</td><td class="p"><a href="https://www.uox.studio/project/720cf90f-e1a6-41c2-84dd-f82c2ee05588" target="_blank" rel="noopener">Release Video</a></td><td class="c">Deadly Doll x Chrome Hearts</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="40" data-client="Venus Et Fleur" data-disc="Film &amp; 3D"><td class="n">41</td><td class="p"><a href="https://www.uox.studio/project/63458590-2c34-4500-a6d1-94d4a853fca0" target="_blank" rel="noopener">Valentine&#x27;s Day 3D Campaign</a></td><td class="c">Venus Et Fleur</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="41" data-client="Flerish" data-disc="Brands &amp; Campaigns"><td class="n">42</td><td class="p"><a href="https://www.uox.studio/project/dc0bc412-abe8-4eca-ab5b-6275894d135e" target="_blank" rel="noopener">Brand Bible &amp; Packaging</a></td><td class="c">Flerish</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="42" data-client="Chito" data-disc="Brands &amp; Campaigns"><td class="n">43</td><td class="p"><a href="https://www.instagram.com/p/CzZciW7Stb2/?img_index=4" target="_blank" rel="noopener">Chito Home Release</a></td><td class="c">Chito</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="43" data-client="Crushed Tonic" data-disc="Brands &amp; Campaigns"><td class="n">44</td><td class="p"><a href="https://crushedtonic.com/" target="_blank" rel="noopener">Social Media, Marketing &amp; Packaging</a></td><td class="c">Crushed Tonic</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="44" data-client="Empower Global" data-disc="Social"><td class="n">45</td><td class="p"><a href="https://www.instagram.com/shopempower/" target="_blank" rel="noopener">Social Media Design Assets</a></td><td class="c">Empower Global</td><td class="d">Social</td></tr>
+          <tr data-order="45" data-client="Pendulum" data-disc="Brands &amp; Campaigns"><td class="n">46</td><td class="p"><a href="https://www.uox.studio/project/df7a7401-d1c8-411c-b62f-6683c54b6cf2" target="_blank" rel="noopener">App UI/UX Design</a></td><td class="c">Pendulum</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="46" data-client="Reflect Orbital" data-disc="Film &amp; 3D"><td class="n">47</td><td class="p"><a href="https://www.uox.studio/project/0209442a-effd-4ce0-9f8c-ed5d68601b8c" target="_blank" rel="noopener">Product Showcase</a></td><td class="c">Reflect Orbital</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="47" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">48</td><td class="p"><a href="https://x.com/Polymarket/status/1853861065056006535" target="_blank" rel="noopener">Swing State Odds: Road to 270</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="48" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">49</td><td class="p"><a href="https://www.uox.studio/project/84b870c6-3a7d-44d7-9239-5c2f828b3379" target="_blank" rel="noopener">UFC 300 on ESPN</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="49" data-client="Yung Bans" data-disc="Cover Art"><td class="n">50</td><td class="p"><a href="https://www.instagram.com/p/BkgaagcB2uR/" target="_blank" rel="noopener">&quot;Easter Pink&quot; ft. Gunna</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="50" data-client="Digital Nas &amp; Lil Yachty" data-disc="Cover Art"><td class="n">51</td><td class="p"><a href="https://open.spotify.com/album/3veNGoY3JmHq1UKkH4GdDE" target="_blank" rel="noopener">Lil Yachty — &quot;Lil Boat&quot; Single Cover</a></td><td class="c">Digital Nas &amp; Lil Yachty</td><td class="d">Cover Art</td></tr>
+          <tr data-order="51" data-client="Hoodrich Pablo Juan" data-disc="Cover Art"><td class="n">52</td><td class="p"><a href="https://www.instagram.com/p/BXOcX8NjWNw/" target="_blank" rel="noopener">&quot;Zombamafoo&quot; ft. Lil Uzi Vert</a></td><td class="c">Hoodrich Pablo Juan</td><td class="d">Cover Art</td></tr>
+          <tr data-order="52" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">53</td><td class="p"><a href="https://www.instagram.com/p/B1aE9wdF7MP/" target="_blank" rel="noopener">&quot;Pop My Shit (Remix)&quot; ft. Lil Keed</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="53" data-client="Money Man" data-disc="Cover Art"><td class="n">54</td><td class="p"><a href="https://music.apple.com/us/album/30-days/1846236922" target="_blank" rel="noopener">30 Days Album</a></td><td class="c">Money Man</td><td class="d">Cover Art</td></tr>
+          <tr data-order="54" data-client="Dvbbs" data-disc="Cover Art"><td class="n">55</td><td class="p"><a href="https://www.youtube.com/watch?v=N8DVRGq8nRQ" target="_blank" rel="noopener">&quot;Torture of the Heart&quot; ft. Nelly Furtado</a></td><td class="c">Dvbbs</td><td class="d">Cover Art</td></tr>
+          <tr data-order="55" data-client="Sean Kingston" data-disc="Cover Art"><td class="n">56</td><td class="p"><a href="https://www.youtube.com/watch?v=BhVRe-0d214" target="_blank" rel="noopener">&quot;Love Is Wonderful&quot; ft. Travis Barker</a></td><td class="c">Sean Kingston</td><td class="d">Cover Art</td></tr>
+          <tr data-order="56" data-client="Cody Ko" data-disc="Merch"><td class="n">57</td><td class="p"><a href="https://www.instagram.com/p/CVTjOmkh5c7/" target="_blank" rel="noopener">Ko Merch — &quot;Sugar High&quot; Collection</a></td><td class="c">Cody Ko</td><td class="d">Merch</td></tr>
+          <tr data-order="57" data-client="Flerish" data-disc="Brands &amp; Campaigns"><td class="n">58</td><td class="p"><a href="https://www.bevnet.com/pr/2025/03/12/flerish-hydration-partners-with-rolling-loud-for-the-2025-festival" target="_blank" rel="noopener">Rolling Loud Partnership</a></td><td class="c">Flerish</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="58" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">59</td><td class="p"><a href="https://x.com/Polymarket/status/1854285596438724867" target="_blank" rel="noopener">&quot;Polymarket Called It First&quot;</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="59" data-client="ESPN" data-disc="Film &amp; 3D"><td class="n">60</td><td class="p"><a href="https://www.uox.studio/project/0dce1cb5-5c39-4389-b88c-20d8a33647b4" target="_blank" rel="noopener">Polymarket x UFC 309 Visualizer</a></td><td class="c">ESPN</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="60" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Social"><td class="n">61</td><td class="p"><a href="https://www.instagram.com/p/BZHgcdHnMKL/" target="_blank" rel="noopener">ASAP Ferg — Social Media Design</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Social</td></tr>
+          <tr data-order="61" data-client="Yung Bans" data-disc="Cover Art"><td class="n">62</td><td class="p"><a href="https://soundcloud.com/yungbans/4tspoon" target="_blank" rel="noopener">&quot;4T Spoon&quot; ft. Playboi Carti</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="62" data-client="Lil Gotit" data-disc="Cover Art"><td class="n">63</td><td class="p"><a href="https://www.instagram.com/p/CB4Z09EBlv6/" target="_blank" rel="noopener">&quot;What It Was&quot; ft. Future</a></td><td class="c">Lil Gotit</td><td class="d">Cover Art</td></tr>
+          <tr data-order="63" data-client="Cody Ko" data-disc="Merch"><td class="n">64</td><td class="p"><a href="https://www.instagram.com/p/CSdUTI9H_Zl/" target="_blank" rel="noopener">Ko Merch — &quot;Sweet Tooth&quot; Collection</a></td><td class="c">Cody Ko</td><td class="d">Merch</td></tr>
+          <tr data-order="64" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">65</td><td class="p"><a href="https://x.com/Polymarket/status/1854286603902185492" target="_blank" rel="noopener">Kamala Harris Winner Visual</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="65" data-client="ASAP Rocky / ASAP Ferg / ASAP Twelvyy" data-disc="Cover Art"><td class="n">66</td><td class="p"><a href="https://www.instagram.com/p/BWfyyGgDZQh/" target="_blank" rel="noopener">ASAP Twelvyy — &quot;Yea Yea Yea&quot; Single Cover</a></td><td class="c">ASAP Rocky / ASAP Ferg / ASAP Twelvyy</td><td class="d">Cover Art</td></tr>
+          <tr data-order="66" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">67</td><td class="p"><a href="https://www.uox.studio/project/2dd949b9-3eb0-4567-9f72-2361480404e5" target="_blank" rel="noopener">&quot;We Were Right&quot;</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="67" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">68</td><td class="p"><a href="https://www.uox.studio/project/a4635675-053b-41d9-9069-25a44ff93f6e" target="_blank" rel="noopener">Grok Partnership Video</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="68" data-client="Polymarket" data-disc="Social"><td class="n">69</td><td class="p"><a href="https://www.instagram.com/polymarket" target="_blank" rel="noopener">Social Media Design</a></td><td class="c">Polymarket</td><td class="d">Social</td></tr>
+          <tr data-order="69" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">70</td><td class="p"><a href="https://www.instagram.com/reel/DI98_5mxFAQ/" target="_blank" rel="noopener">Canadian Prime Minister Election</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="70" data-client="Polymarket" data-disc="Film &amp; 3D"><td class="n">71</td><td class="p"><a href="https://x.com/Polymarket/status/1880026871943033016" target="_blank" rel="noopener">SpaceX Visual</a></td><td class="c">Polymarket</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="71" data-client="Rolling Loud" data-disc="Merch"><td class="n">72</td><td class="p"><a href="https://www.instagram.com/p/Cf9rhRkpiBP/" target="_blank" rel="noopener">&quot;Marquee Hoodie&quot; — Rolling Loud Toronto 2022</a></td><td class="c">Rolling Loud</td><td class="d">Merch</td></tr>
+          <tr data-order="72" data-client="XVI" data-disc="Merch"><td class="n">73</td><td class="p"><a href="https://www.instagram.com/p/CfKYNOIJJf-/" target="_blank" rel="noopener">&quot;Liberty Bell&quot; Design</a></td><td class="c">XVI</td><td class="d">Merch</td></tr>
+          <tr data-order="73" data-client="Stopthis" data-disc="Cover Art"><td class="n">74</td><td class="p"><a href="https://www.instagram.com/p/CSh4fWFBlJ1/" target="_blank" rel="noopener">Sinner, Triple Cross &amp; Gotham Covers</a></td><td class="c">Stopthis</td><td class="d">Cover Art</td></tr>
+          <tr data-order="74" data-client="Dvbbs" data-disc="Brands &amp; Campaigns"><td class="n">75</td><td class="p"><a href="https://www.instagram.com/p/CLKt38uhq1_/" target="_blank" rel="noopener">2021 Logo Redesign</a></td><td class="c">Dvbbs</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="75" data-client="Santo Gallery" data-disc="Film &amp; 3D"><td class="n">76</td><td class="p"><a href="https://www.instagram.com/p/CGias-DhDZk/" target="_blank" rel="noopener">Website Asset Creation</a></td><td class="c">Santo Gallery</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="76" data-client="Juice WRLD" data-disc="Merch"><td class="n">77</td><td class="p"><a href="https://www.instagram.com/p/BxA1rcGpd15/" target="_blank" rel="noopener">Death Race for Love #1 Album Plaque</a></td><td class="c">Juice WRLD</td><td class="d">Merch</td></tr>
+          <tr data-order="77" data-client="YG" data-disc="Merch"><td class="n">78</td><td class="p"><a href="https://www.instagram.com/p/BiYQ3-ZBsPb/" target="_blank" rel="noopener">My Krazy Life Plaque Design</a></td><td class="c">YG</td><td class="d">Merch</td></tr>
+          <tr data-order="78" data-client="Young Thug" data-disc="Merch"><td class="n">79</td><td class="p"><a href="https://www.instagram.com/p/B1XjYFHFAND/" target="_blank" rel="noopener">&quot;So Much Fun&quot; Merchandise Bundle</a></td><td class="c">Young Thug</td><td class="d">Merch</td></tr>
+          <tr data-order="79" data-client="Yung Bans" data-disc="Cover Art"><td class="n">80</td><td class="p"><a href="https://www.instagram.com/p/BzGtZP7l9oz/" target="_blank" rel="noopener">&quot;Hold Up&quot; ft. Young Thug &amp; Gunna</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="80" data-client="Yung Bans" data-disc="Cover Art"><td class="n">81</td><td class="p"><a href="https://www.instagram.com/p/BkQtvFYBv7p/" target="_blank" rel="noopener">&quot;So Long&quot; ft. XXXTentacion</a></td><td class="c">Yung Bans</td><td class="d">Cover Art</td></tr>
+          <tr data-order="81" data-client="Yung Bans" data-disc="Brands &amp; Campaigns"><td class="n">82</td><td class="p"><a href="https://www.instagram.com/p/BjVbGP9B-be/" target="_blank" rel="noopener">Artist Rebrand</a></td><td class="c">Yung Bans</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="82" data-client="Sheck Wes &amp; Valee" data-disc="Social"><td class="n">83</td><td class="p"><a href="https://www.instagram.com/p/Binj5NzH-d2/" target="_blank" rel="noopener">M*O*S*H Tour Flyer</a></td><td class="c">Sheck Wes &amp; Valee</td><td class="d">Social</td></tr>
+          <tr data-order="83" data-client="Rich the Kid" data-disc="Merch"><td class="n">84</td><td class="p"><a href="https://www.instagram.com/p/B9z4gwxBaeD/" target="_blank" rel="noopener">&quot;BossMan&quot; Hoodie</a></td><td class="c">Rich the Kid</td><td class="d">Merch</td></tr>
+          <tr data-order="84" data-client="Tay-K" data-disc="Cover Art"><td class="n">85</td><td class="p"><a href="https://www.instagram.com/p/BaE818IDXW8/" target="_blank" rel="noopener">&quot;Coolin&quot; / 55bagz EP Cover</a></td><td class="c">Tay-K</td><td class="d">Cover Art</td></tr>
+          <tr data-order="85" data-client="Digital Nas" data-disc="Cover Art"><td class="n">86</td><td class="p"><a href="https://www.instagram.com/p/BwLAZI7F75x/" target="_blank" rel="noopener">DN2 Cover</a></td><td class="c">Digital Nas</td><td class="d">Cover Art</td></tr>
+          <tr data-order="86" data-client="Duwap Kaine" data-disc="Cover Art"><td class="n">87</td><td class="p"><a href="https://www.instagram.com/p/Bt9y_F4HPq1/" target="_blank" rel="noopener">&quot;You Live, You Learn&quot; Cover</a></td><td class="c">Duwap Kaine</td><td class="d">Cover Art</td></tr>
+          <tr data-order="87" data-client="Chief Keef &amp; Zaytoven" data-disc="Film &amp; 3D"><td class="n">88</td><td class="p"><a href="https://www.instagram.com/p/BvVTCtOFfA9/" target="_blank" rel="noopener">Glotoven 3D Promotional Content</a></td><td class="c">Chief Keef &amp; Zaytoven</td><td class="d">Film &amp; 3D</td></tr>
+          <tr data-order="88" data-client="Galaxsio" data-disc="Brands &amp; Campaigns"><td class="n">89</td><td class="p"><a href="https://www.instagram.com/p/B_tQ5kkh1UX/" target="_blank" rel="noopener">Program UI/UX Design</a></td><td class="c">Galaxsio</td><td class="d">Brands &amp; Campaigns</td></tr>
+          <tr data-order="89" data-client="Paris Shadows" data-disc="Cover Art"><td class="n">90</td><td class="p"><a href="https://www.instagram.com/p/CGDqA6OB70_/" target="_blank" rel="noopener">Single Covers</a></td><td class="c">Paris Shadows</td><td class="d">Cover Art</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="section">
+        <p class="section-label">Socials:</p>
+        <ul class="client-projects">
+          <li><a href="https://www.instagram.com/math247" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.instagram.com/mathsgallery" target="_blank" rel="noopener">Gallery</a></li>
+          <li><a href="https://www.instagram.com/uoxstudio" target="_blank" rel="noopener">UOX Studio</a></li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+
+  <script>
+    function toggleAbout(e) {
+      e.preventDefault();
+      var section = document.getElementById('about');
+      var toggle = document.getElementById('about-toggle');
+      var open = section.classList.toggle('visible');
+      toggle.textContent = open ? '[-] about' : '[+] about';
+    }
+
+    // Cursor readout
+    var readout = document.getElementById('cursor-readout');
+    document.addEventListener('mousemove', function(e) {
+      var x = String(e.clientX).padStart(4, '0');
+      var y = String(e.clientY).padStart(4, '0');
+      readout.innerHTML = 'X: ' + x + ' &nbsp; Y: ' + y;
+    });
+
+    // --- Scattered Ghost Cards ---
+    var cards = [];
+    var MAX_CARDS = 8;
+    var ogCache = {};
+    var activeThumbUrls = new Set(); // dedupe: no same thumb twice on screen
+
+    var SIZES = [
+      { w: 260, h: 180 },
+      { w: 200, h: 260 },
+      { w: 300, h: 200 },
+      { w: 180, h: 240 },
+      { w: 240, h: 160 },
+    ];
+
+    function randomBetween(a, b) { return a + Math.random() * (b - a); }
+
+    function spawnCard(url, ogImg, title, isLight) {
+      var size = SIZES[Math.floor(Math.random() * SIZES.length)];
+      var margin = 40;
+      var pageEl = document.querySelector('.page');
+      var colEdge = pageEl ? Math.round(pageEl.getBoundingClientRect().right) + 40 : 660;
+      var maxX = window.innerWidth - size.w - margin;
+      var maxY = window.innerHeight - size.h - margin;
+
+      var x;
+      if (maxX > colEdge) {
+        x = randomBetween(colEdge, maxX);
+      } else {
+        x = Math.max(margin, maxX);
+      }
+      var y = randomBetween(margin, Math.max(margin, maxY));
+
+      var card = document.createElement('div');
+      card.className = 'ghost-card' + (isLight ? ' light-bg' : '');
+      card.style.width = size.w + 'px';
+      card.style.height = size.h + 'px';
+      card.style.left = x + 'px';
+      card.style.top = y + 'px';
+
+      if (ogImg) {
+        var img = document.createElement('img');
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'cover';
+        img.style.display = 'block';
+        img.onload = function() {
+          var nat = img.naturalWidth / img.naturalHeight;
+          // Fix width at 280px, derive height from actual aspect ratio — no crop
+          var newW = 280;
+          var newH = Math.round(newW / nat);
+          // clamp height so nothing gets absurdly tall
+          if (newH > 420) { newH = 420; newW = Math.round(newH * nat); }
+          if (newH < 120) { newH = 120; newW = Math.round(newH * nat); }
+          newW = Math.min(newW, 380);
+          card.style.width = newW + 'px';
+          card.style.height = newH + 'px';
+          // nudge back on screen if resize pushed it off
+          var cx = parseFloat(card.style.left);
+          var cy = parseFloat(card.style.top);
+          if (cx + newW > window.innerWidth - 20) card.style.left = (window.innerWidth - newW - 20) + 'px';
+          if (cy + newH > window.innerHeight - 20) card.style.top = (window.innerHeight - newH - 20) + 'px';
+        };
+        img.src = ogImg;
+        card.appendChild(img);
+      } else {
+        card.style.background = '#111';
+        var label = document.createElement('div');
+        label.style.position = 'absolute';
+        label.style.top = '0';
+        label.style.left = '0';
+        label.style.right = '0';
+        label.style.bottom = '0';
+        label.style.display = 'flex';
+        label.style.alignItems = 'center';
+        label.style.justifyContent = 'center';
+        label.style.padding = '20px';
+        label.style.color = '#ffffff';
+        label.style.fontFamily = 'Times New Roman, serif';
+        label.style.fontSize = '13px';
+        label.style.lineHeight = '1.4';
+        label.style.textAlign = 'center';
+        label.textContent = title || '';
+        card.appendChild(label);
+      }
+
+      document.body.appendChild(card);
+      requestAnimationFrame(function() { card.classList.add('visible'); });
+
+      if (ogImg) activeThumbUrls.add(ogImg);
+      card._thumbUrl = ogImg || null;
+
+      cards.push(card);
+      scheduleAutoFade(card);
+
+      if (cards.length > MAX_CARDS) {
+        var old = cards.shift();
+        if (old._autoFade) clearTimeout(old._autoFade);
+        fadeOut(old);
+      }
+
+      return card;
+    }
+
+    function fadeOut(card) {
+      if (card._thumbUrl) activeThumbUrls.delete(card._thumbUrl);
+      card.classList.remove('visible');
+      card.classList.add('fading');
+      setTimeout(function() { if (card.parentNode) card.parentNode.removeChild(card); }, 1500);
+    }
+
+    // Mux thumbnail map: project page URL -> Mux thumbnail
+    var MUX_THUMBS = {
+      // Polymarket
+      'https://www.uox.studio/': '/img/uox-logo.jpg',
+      'https://www.instagram.com/uoxstudio': '/img/uox-logo.jpg',
+      'https://x.com/Polymarket/status/1854285596438724867': '/img/polymarket-called-it-first.jpg',
+      'https://x.com/Polymarket/status/1853861065056006535': '/img/polymarket-road-to-270.jpg',
+      'https://x.com/Polymarket/status/1854286603902185492': '/img/polymarket-kamala-winner.jpg',
+      'https://www.instagram.com/reel/DI98_5mxFAQ/': '/img/polymarket-canada-election.jpg',
+      'https://x.com/Polymarket/status/1986514405882789983': '/img/polymarket-nyc-mayor-billboard.jpg',
+      'https://www.instagram.com/polymarket': '/img/polymarket-social-media.jpg',
+      'https://www.rollingstone.com/music/music-news/tyla-wwp-mixtape-1235393626/': '/img/tyla-wwp.jpg',
+      'https://x.com/awge/status/892438597097242624': '/img/asap-rocky-awgest.jpg',
+      'https://www.youtube.com/watch?v=WXeWfr4lWsM': '/img/jesse-jo-stark-patterns.jpg',
+      'https://www.uox.studio/project/720cf90f-e1a6-41c2-84dd-f82c2ee05588': '/img/deadly-doll.jpg',
+      'https://www.instagram.com/p/CzZciW7Stb2/?img_index=4': '/img/chito-home-release.jpg',
+      'https://music.apple.com/us/album/30-days/1846236922': '/img/money-man-30-days.jpg',
+      'https://en.wikipedia.org/wiki/Boo%27d_Up': '/img/ella-mai-bood-up-plaque.jpg',
+      'https://www.instagram.com/p/CVTjOmkh5c7/': '/img/cody-ko-sugar-high.jpg',
+      'https://www.instagram.com/p/CSdUTI9H_Zl/': '/img/cody-ko-sweet-tooth.jpg',
+      'https://www.instagram.com/p/BqLco9NA4Yk/': '/img/srlo-awge-under-armour.jpg',
+      'https://www.instagram.com/p/BgrwgDRjZC8/': '/img/dj-mustard-social-content.jpg',
+      'https://www.instagram.com/p/CIMlNESh4T8/': '/img/kyler-murray-km1.jpg',
+      'https://www.youtube.com/watch?v=uJkADqdzDMY': '/img/88glam-east-to-west.jpg',
+      'https://www.revolt.tv/article/2021-07-12/49450/lil-uzi-vert-hops-on-ngeeyls-off-white': '/img/ngeeyl-off-white.jpg',
+      'https://www.thehypemagazine.com/2021/05/21/sean-kingston-is-back-with-darkest-times/': '/img/sean-kingston-darkest-times.jpg',
+      'https://www.youtube.com/watch?v=BhVRe-0d214': '/img/sean-kingston-love-is-wonderful.jpg',
+      'https://www.instagram.com/p/BZHgcdHnMKL/': '/img/asap-ferg-social.jpg',
+      'https://www.instagram.com/p/Cf9rhRkpiBP/': '/img/rolling-loud-toronto-marquee.jpg',
+      'https://www.instagram.com/p/CfKYNOIJJf-/': '/img/xvi-liberty-bell.jpg',
+      'https://www.instagram.com/p/CSh4fWFBlJ1/': '/img/stopthis-sinner.jpg',
+      'https://www.instagram.com/p/CLKt38uhq1_/': '/img/dvbbs-logo-2021.jpg',
+      'https://www.instagram.com/p/CGias-DhDZk/': '/img/santo-gallery.jpg',
+      'https://www.instagram.com/p/B5-8GTWlou4/': '/img/young-thug-bieber-merch.jpg',
+      'https://www.instagram.com/p/BkQh-NOBvI2/': '/img/yung-bans-vol-5.jpg',
+      'https://www.instagram.com/p/BwJiDf0F65M/': '/img/digital-nas-lost-files-2.jpg',
+      'https://www.instagram.com/p/B4tMfJiFyyU/': '/img/rolling-loud-la.jpg',
+      'https://www.instagram.com/p/BuITsOylpH2/': '/img/hoodrich-screaming-slatt.jpg',
+      'https://www.instagram.com/p/BzY6ufdFsa3/': '/img/lil-gotit-pop-my-shit.jpg',
+      'https://www.instagram.com/p/Ba9zq1hj-zg/': '/img/jay-critch-fashion.jpg',
+      'https://www.instagram.com/p/BkgaagcB2uR/': '/img/yung-bans-easter-pink.jpg',
+      'https://www.instagram.com/p/B1aE9wdF7MP/': '/img/lil-gotit-pop-my-shit-remix.jpg',
+      'https://www.instagram.com/p/CB4Z09EBlv6/': '/img/lil-gotit-what-it-was.jpg',
+      'https://www.instagram.com/p/BWfyyGgDZQh/': '/img/asap-twelvyy-yea-yea-yea.jpg',
+      'https://www.instagram.com/p/BxA1rcGpd15/': '/img/juice-wrld-drfl-plaque.jpg',
+      'https://www.instagram.com/p/BiYQ3-ZBsPb/': '/img/yg-my-krazy-life-plaque.jpg',
+      'https://www.instagram.com/p/B1XjYFHFAND/': '/img/young-thug-so-much-fun.jpg',
+      'https://www.instagram.com/p/BzGtZP7l9oz/': '/img/yung-bans-hold-up.jpg',
+      'https://www.instagram.com/p/BkQtvFYBv7p/': '/img/yung-bans-so-long.jpg',
+      'https://www.instagram.com/p/BjVbGP9B-be/': '/img/yung-bans-rebrand.jpg',
+      'https://www.instagram.com/p/Binj5NzH-d2/': '/img/sheck-wes-valee-mosh.jpg',
+      'https://www.instagram.com/p/B9z4gwxBaeD/': '/img/rich-the-kid-hoodie.jpg',
+      'https://www.instagram.com/p/BaE818IDXW8/': '/img/tay-k-coolin.jpg',
+      'https://www.instagram.com/p/BwLAZI7F75x/': '/img/digital-nas-dn2.jpg',
+      'https://www.instagram.com/p/Bt9y_F4HPq1/': '/img/duwap-kaine-you-live-you-learn.jpg',
+      'https://www.instagram.com/p/BvVTCtOFfA9/': '/img/chief-keef-glotoven-3d.jpg',
+      'https://www.instagram.com/p/B_tQ5kkh1UX/': '/img/galaxsio-ui.jpg',
+      'https://www.instagram.com/p/CGDqA6OB70_/': '/img/paris-shadows.jpg',
+      'https://www.instagram.com/p/CBBrpn5hTJG/': '/img/dvbbs-tinted-eyes.jpg',
+      'https://www.instagram.com/p/BXOcX8NjWNw/': '/img/hoodrich-zombamafoo.jpg',
+      'https://open.spotify.com/album/3veNGoY3JmHq1UKkH4GdDE': '/img/lil-yachty-lil-boat.jpg',
+      'https://soundcloud.com/yungbans/4tspoon': '/img/yung-bans-4tspoon.jpg',
+      'https://www.hotnewhiphop.com/766315-money-man-purple-heart-review': '/img/money-man-purple-heart.jpg',
+      'https://www.uox.studio/project/d71ae376-dd4e-4a9f-bdc2-4368882a3524': '/img/espn-celtics-finals.jpg',
+      'https://www.uox.studio/project/42d48d56-d64d-481b-888d-1eb06e1e4612': '/img/polymarket-nyse-takeover.jpg',
+      'https://www.uox.studio/project/2dd949b9-3eb0-4567-9f72-2361480404e5': 'https://image.mux.com/mL8Bp94NzYfWgu008X2pVuP5niqay2JrC02vg022eabw3g/thumbnail.jpg?width=600&height=400&fit_mode=smartcrop&time=3',
+      'https://x.com/Polymarket/status/1880026871943033016': 'https://image.mux.com/DeWWb9OqhMDAgcwXDLEL8EeJCyHarCYqkg500ZjzMYSU/thumbnail.jpg?width=800&time=2',
+      'https://www.instagram.com/p/BWv1yAeji4P/': '/img/usher-social-content.jpg',
+      'https://www.instagram.com/p/B0hGsb4FngM/': '/img/yung-bans-misunderstood-billboard.jpg',
+      'https://www.instagram.com/p/BgKQXwDhJx_/': '/img/adidas-prophere-campaign.jpg',
+      'https://www.youtube.com/watch?v=N8DVRGq8nRQ': '/img/dvbbs-torture-of-the-heart.jpg',
+      'https://www.uox.studio/project/a4635675-053b-41d9-9069-25a44ff93f6e': 'https://image.mux.com/0225NsqsZfAJm354KpLWhtwqa3tJhVGJ1x6Wmgqwl6r8/thumbnail.jpg?width=800&time=3',
+      'https://www.uox.studio/project/77c2f9d0-ff52-4105-a774-616ad1debaaf': 'https://image.mux.com/FbDFHd800ZmcYCR00WsVtzs1ONxKyRMseFRKA004A4YRnw/thumbnail.jpg?width=800&time=3',
+      'https://www.uox.studio/project/0dce1cb5-5c39-4389-b88c-20d8a33647b4': 'https://image.mux.com/d7PtjHG7HlZ3iPiBvhyFVMnPC02q8JA6d02I8ItMO021UQ/thumbnail.jpg?width=800&time=3',
+      // NBC Olympics
+      'https://www.uox.studio/project/ba764f56-7dcc-4019-9914-68327ca5ddb0': 'https://image.mux.com/LUQcKOlajGXf78HMw3U5PTvYZPV2PZr88YZOoq1o4TY/thumbnail.jpg?width=800&time=3',
+      // ESPN
+      'https://www.uox.studio/project/c122ffff-94a1-433d-b4bf-e1f24ecfe23c': 'https://image.mux.com/J00hH7GgJMtR5AHItzkbcNHdS72TVEe9u02w0201q01J3avs/thumbnail.jpg?width=800&time=3',
+      'https://www.uox.studio/project/84b870c6-3a7d-44d7-9239-5c2f828b3379': 'https://image.mux.com/3gigFSEUTd8fz4gSKESsYK01IJlQnKFZkI02Gc2026wGMc/thumbnail.jpg?width=800&time=3',
+      // Bleacher Report
+      'https://www.uox.studio/project/58ae2a02-349e-4d21-b964-9e3da010bbf7': 'https://image.mux.com/zCGJYt9NajW9ixcTSHFOBNT2zFzHmQZHJ9CfPqOFfzU/thumbnail.jpg?width=800&time=3',
+      // Amazon Prime
+      'https://www.uox.studio/project/555b4222-0010-482f-9364-4c598c3246cd': 'https://image.mux.com/43faMXa9T9oWnLvnLml005Vq3wNZ3yaFaoQnMDaHyD02A/thumbnail.jpg?width=800&time=3',
+      // Drake
+      'https://www.instagram.com/reel/DKi4ThyuN9R/': 'https://image.mux.com/gXb4ZCg02ydfgSmdrP2SNn1yximAzleHzpsEsDsUV00zc/thumbnail.jpg?width=800&time=3',
+      // Venus Et Fleur
+      'https://www.uox.studio/project/63458590-2c34-4500-a6d1-94d4a853fca0': 'https://image.mux.com/Do01viYi49OmsY8MS3uKrLsdkEku1QVw01Bh01aRGbgkzg/thumbnail.jpg?width=800&time=3',
+      // LØCI
+      'https://www.uox.studio/project/5b5e4f14-05ba-4d57-a724-0542ae1f568d': 'https://image.mux.com/kkPwulxd5qG95FF4xkwpBglOevfMxW5S02J2e01OSaW7w/thumbnail.jpg?width=800&time=3',
+      // Flerish
+      'https://www.uox.studio/project/dc0bc412-abe8-4eca-ab5b-6275894d135e': 'https://image.mux.com/IXHpQOHqGiKsW02HdHd02rGeFmeQbUaArQvHv3xRRqNCc/thumbnail.jpg?width=800&time=3',
+      // TikTok
+      'https://www.uox.studio/project/1d504882-e573-4e09-867c-255c2f48a141': 'https://image.mux.com/JmSsz58vO49K1GyUzZLBlFSzeyIywfyW8qXVuDJeVTE/thumbnail.jpg?width=800&time=3',
+      // Pendulum
+      'https://www.uox.studio/project/df7a7401-d1c8-411c-b62f-6683c54b6cf2': 'https://image.mux.com/kS4J9QGw3KMhJACW9xndy4cGtETn02r02vQro4tEpEOJc/thumbnail.jpg?width=800&time=3',
+      // Reflect Orbital
+      'https://www.uox.studio/project/0209442a-effd-4ce0-9f8c-ed5d68601b8c': 'https://image.mux.com/BMqKqCNaxk1lwD2600wEC91cD5FJRDuO009eNr01GtNsOo/thumbnail.jpg?width=800&time=3',
+      // Cover art — static assets
+      'https://www.uox.studio/project/913be19a-4395-494c-9019-2c716dce4957': '/img/fighting-demons-juice-wrld.jpg',
+      'https://www.hotnewhiphop.com/313860-lil-tjay-is-done-with-love-on-calling-my-phone-ft-6lack-new-song': '/img/calling-my-phone-lil-tjay.jpg',
+      'https://www.revolt.tv/article/2021-03-19/57551/lil-tjay-polo-g-and-fivio-foreign-team-up-for-headshot': '/img/headshot-lil-tjay.jpg',
+      'https://www.revolt.tv/article/2022-02-04/151275/king-von-21-savage-dont-play-that-single': '/img/dont-play-that-king-von-ft.-21-savage.jpg',
+      'https://pitchfork.com/reviews/albums/sexyy-red-hood-hottest-princess/': '/img/hottest-hood-princess-sexyy-red.jpg',
+      'https://open.spotify.com/album/5cRZBMDWTNqtJnWGDlNHOV': '/img/lyf-yeat.jpg',
+      'https://hypebeast.com/2018/1/math-collage-artist-asap-mob': '/img/hypebeast-logo.jpg',
+      'https://youtu.be/NM-c_-aUGZA?si=gu0eAFkoE4Y1c2IK&t=303': '/img/complex-logo.jpg',
+    };
+
+    // Static /img/ thumbnails with white backgrounds — use light card bg
+    var LIGHT_BG_THUMBS = new Set([
+      '/img/hypebeast-logo.jpg',
+      '/img/chito-home-release.jpg',
+      '/img/asap-twelvyy-yea-yea-yea.jpg',
+      '/img/young-thug-so-much-fun.jpg',
+      '/img/rich-the-kid-hoodie.jpg',
+      '/img/digital-nas-dn2.jpg',
+      '/img/galaxsio-ui.jpg',
+      '/img/rolling-loud-toronto-marquee.jpg',
+      '/img/xvi-liberty-bell.jpg',
+      '/img/stopthis-sinner.jpg',
+      '/img/dvbbs-logo-2021.jpg',
+      '/img/santo-gallery.jpg',
+      '/img/young-thug-bieber-merch.jpg',
+      '/img/cody-ko-sweet-tooth.jpg',
+      '/img/cody-ko-sugar-high.jpg',
+      '/img/rolling-loud-la.jpg',
+      '/img/ella-mai-bood-up-plaque.jpg',
+      '/img/uox-logo.jpg',
+      '/img/complex-logo.jpg',
+      '/img/lyf-yeat.jpg',
+      '/img/fighting-demons-juice-wrld.jpg',
+      '/img/calling-my-phone-lil-tjay.jpg',
+      '/img/headshot-lil-tjay.jpg',
+      '/img/dont-play-that-king-von-ft.-21-savage.jpg',
+      '/img/hottest-hood-princess-sexyy-red.jpg',
+      '/img/hypebeast-asap-mob.jpg',
+    ]);
+
+    function getOgAndSpawn(url, title) {
+      var muxThumb = MUX_THUMBS[url];
+      // Skip if this exact thumbnail is already visible
+      if (muxThumb && activeThumbUrls.has(muxThumb)) return;
+      var isLight = muxThumb && LIGHT_BG_THUMBS.has(muxThumb);
+      spawnCard(url, muxThumb || null, title, isLight);
+    }
+
+
+    // Work index: filter by discipline, sort by column
+    (function() {
+      var tbody = document.querySelector('.index tbody');
+      if (!tbody) return;
+      var rows = Array.prototype.slice.call(tbody.rows);
+      var DISC = ['Film & 3D','Cover Art','Billboards & OOH','Brands & Campaigns','Social','Merch'];
+      var state = { filter: 'All', sort: 'order' };
+      function apply() {
+        var list = rows.slice();
+        if (state.sort === 'client') list.sort(function(a, b) { return a.dataset.client.localeCompare(b.dataset.client) || a.dataset.order - b.dataset.order; });
+        else if (state.sort === 'disc') list.sort(function(a, b) { return DISC.indexOf(a.dataset.disc) - DISC.indexOf(b.dataset.disc) || a.dataset.order - b.dataset.order; });
+        else list.sort(function(a, b) { return a.dataset.order - b.dataset.order; });
+        var n = 0;
+        list.forEach(function(r) {
+          var show = state.filter === 'All' || r.dataset.disc === state.filter;
+          r.hidden = !show;
+          if (show) r.cells[0].textContent = String(++n).padStart(2, '0');
+          tbody.appendChild(r);
+        });
+        document.querySelectorAll('[data-filter]').forEach(function(b) { b.setAttribute('aria-pressed', b.dataset.filter === state.filter); });
+        document.querySelectorAll('[data-sort]').forEach(function(b) {
+          if (b.dataset.sort === state.sort && b.textContent !== 'Project') b.setAttribute('aria-sort', 'ascending'); else b.removeAttribute('aria-sort');
+        });
+      }
+      document.querySelectorAll('[data-filter]').forEach(function(b) { b.addEventListener('click', function() { state.filter = b.dataset.filter; apply(); }); });
+      document.querySelectorAll('[data-sort]').forEach(function(b) { b.addEventListener('click', function() { state.sort = b.dataset.sort; apply(); }); });
+    })();
+
+    // Whole row = hover + click target
+    document.querySelectorAll('.index tbody tr').forEach(function(tr) {
+      var a = tr.querySelector('td.p a'); if (!a) return;
+      var url = a.href, title = a.textContent.trim();
+      var hasThumb = !!MUX_THUMBS[url];
+      var external = url.includes('instagram.com') || url.includes('x.com');
+      tr.addEventListener('mouseenter', function() { if (!external || hasThumb) getOgAndSpawn(url, title); });
+      tr.addEventListener('click', function(e) { if (e.target.closest('a')) return; window.open(url, '_blank', 'noopener'); });
+    });
+
+    document.querySelectorAll('.client-projects a, .employer-link a, .press-line a').forEach(function(a) {
+      var url = a.href;
+      if (!url || url.endsWith('#')) return;
+      // IG/X pages have no readable preview — only attach a card when we have our own thumbnail
+      if ((url.includes('instagram.com') || url.includes('x.com')) && !MUX_THUMBS[url]) return;
+      var title = a.textContent.trim();
+      a.addEventListener('mouseenter', function() { getOgAndSpawn(url, title); });
+    });
+
+    document.addEventListener('mouseleave', function() {
+      cards.forEach(function(c) {
+        if (c._autoFade) clearTimeout(c._autoFade);
+        fadeOut(c);
+      });
+      cards = [];
+      activeThumbUrls.clear();
+    });
+
+    // Auto-fade: each card lives for 3s then dissolves on its own
+    function scheduleAutoFade(card) {
+      card._autoFade = setTimeout(function() {
+        var idx = cards.indexOf(card);
+        if (idx > -1) cards.splice(idx, 1);
+        fadeOut(card);
+      }, 3000);
+    }
+
+    // Scroll: parallax drift only — fade is handled by the timer above
+    var lastScrollY = window.scrollY;
+    window.addEventListener('scroll', function() {
+      var currentY = window.scrollY;
+      var delta = currentY - lastScrollY;
+      lastScrollY = currentY;
+
+      cards.forEach(function(c) {
+        var currentTop = parseFloat(c.style.top) || 0;
+        c.style.top = (currentTop - delta * 0.3) + 'px';
+      });
+    }, { passive: true });
+
+    // Mobile: scrolling is the hover. The row crossing the focus line drives a fixed preview.
+    (function() {
+      if (!window.matchMedia('(hover: none)').matches) return;
+      var box = document.createElement('div'); box.id = 'm-preview'; box.setAttribute('aria-hidden', 'true');
+      var imgA = new Image(), imgB = new Image(); imgA.alt = imgB.alt = '';
+      box.appendChild(imgA); box.appendChild(imgB); document.body.appendChild(box);
+      var front = imgA, current = null, activeRow = null, ticking = false;
+      var preloaded = {};
+      function preload(src) { if (src && !preloaded[src]) { preloaded[src] = 1; var i = new Image(); i.src = src; } }
+      function show(src, light) {
+        if (src === current) return; current = src;
+        if (!src) { box.classList.remove('on'); return; }
+        box.classList.toggle('light-bg', !!light);
+        var back = front === imgA ? imgB : imgA;
+        back.onload = function() { back.classList.add('show'); front.classList.remove('show'); front = back; box.classList.add('on'); };
+        back.src = src;
+      }
+      function update() {
+        ticking = false;
+        var focusY = window.innerHeight * 0.42, best = null, bestD = Infinity;
+        var rows = document.querySelectorAll('.index tbody tr:not([hidden])');
+        for (var i = 0; i < rows.length; i++) {
+          var r = rows[i].getBoundingClientRect();
+          if (r.bottom < 0 || r.top > window.innerHeight) continue;
+          var d = Math.abs((r.top + r.bottom) / 2 - focusY);
+          if (d < bestD) { bestD = d; best = rows[i]; }
+        }
+        if (best && bestD > 90) best = null;   // nothing near the line (e.g. header still on screen)
+        if (best !== activeRow) {
+          if (activeRow) activeRow.classList.remove('is-active');
+          activeRow = best;
+          if (activeRow) activeRow.classList.add('is-active');
+        }
+        var a = activeRow && activeRow.querySelector('td.p a');
+        var src = a ? MUX_THUMBS[a.href] : null;
+        show(src || null, src && LIGHT_BG_THUMBS.has(src));
+        // warm the next few images
+        if (activeRow) { var n = activeRow.nextElementSibling; for (var k = 0; k < 3 && n; k++, n = n.nextElementSibling) { var na = n.querySelector('td.p a'); if (na) preload(MUX_THUMBS[na.href]); } }
+      }
+      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll);
+      document.querySelectorAll('[data-filter],[data-sort]').forEach(function(b) { b.addEventListener('click', function() { setTimeout(update, 0); }); });
+      update();
+    })();
+  </script>
+</body>
+</html>
