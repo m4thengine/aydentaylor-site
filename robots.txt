@@ -1,5 +1,4 @@
 User-agent: *
 Allow: /
-Disallow: /lab/
 
 Sitemap: https://aydentaylor.com/sitemap.xml

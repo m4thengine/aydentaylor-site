@@ -149,13 +149,32 @@
     .index tbody tr { transition: background-color .12s ease; }
     .index tbody tr:hover, .index tbody tr.is-active { background: #f3f3f5; }
     .index tbody tr:hover td.p a, .index tbody tr.is-active td.p a { color: #0b3d91; }
-    /* Mobile scroll preview */
-    #m-preview { position: fixed; right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: 42vw; max-width: 230px; aspect-ratio: 1 / 1; background: #111; z-index: 600; opacity: 0; transform: translateY(8px); transition: opacity .25s ease, transform .25s ease; pointer-events: none; overflow: hidden; }
-    #m-preview.light-bg { background: #fff; outline: 1px solid #e6e6ea; }
-    #m-preview.on { opacity: 1; transform: none; }
-    #m-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .2s ease; }
-    #m-preview img.show { opacity: 1; }
-    #m-preview::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 160px; opacity: .06; pointer-events: none; }
+    /* Mobile lab */
+    .m-frame { position: fixed; pointer-events: none; overflow: hidden; background: #111; opacity: 0; transition: opacity .3s ease, transform .3s ease; }
+    .m-frame.light-bg { background: #fff; }
+    .m-frame.on { opacity: 1; }
+    .m-frame img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; opacity: 0; transition: opacity .25s ease; }
+    .m-frame img.show { opacity: 1; }
+    .m-corner { right: 14px; bottom: calc(14px + env(safe-area-inset-bottom, 0px)); width: 42vw; max-width: 230px; aspect-ratio: 1 / 1; z-index: 600; transform: translateY(8px); }
+    .m-corner.on { transform: none; }
+    .m-vf { left: 0; right: 0; top: 0; height: 44vh; z-index: 600; transform: translateY(-100%); border-bottom: 1px solid #000; }
+    .m-vf.on { transform: none; }
+    .m-vf.light-bg { border-bottom-color: #e6e6ea; }
+    .m-vf img { inset: 14px 14px 34px; width: calc(100% - 28px); height: calc(100% - 48px); }
+    .m-cap { position: absolute; left: 14px; right: 14px; bottom: 9px; font: 11px 'Courier New', Courier, monospace; color: #8a8a8f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .m-bd { inset: 0; z-index: -1; background: transparent !important; }
+    .m-bd img { object-fit: cover; filter: saturate(.9); }
+    .m-bd img.show { opacity: .2; }
+    html.mode-backdrop { background: #fff; }
+    html.mode-backdrop body { background: transparent; }
+    html.mode-backdrop .index tbody tr.is-active { background: rgba(255,255,255,.75); }
+    .m-ghost { position: fixed; z-index: 600; pointer-events: none; background: #111; overflow: hidden; opacity: 0; transform: scale(.98); transition: opacity .25s ease, transform .4s ease; }
+    .m-ghost.light-bg { background: #fff; }
+    .m-ghost.on { opacity: 1; transform: none; }
+    .m-ghost.out { opacity: 0; transition: opacity .9s ease; }
+    .m-ghost img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .m-ghost::after, .m-frame:not(.m-bd)::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 160px; opacity: .06; pointer-events: none; }
+    html.mode-corner .m-corner { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
     @media (hover: none) { #cursor-readout { display: none; } .about-link { background: #fff; padding: 2px 6px; margin: -2px -6px; } }
     button:focus-visible { outline: 2px solid #1155cc; outline-offset: 2px; }
     @media (max-width: 640px) {
@@ -650,44 +669,99 @@
       });
     }, { passive: true });
 
-    // Mobile: scrolling is the hover. The row crossing the focus line drives a fixed preview.
+    // Mobile: scrolling is the hover. Each row crossing the focus line drops a ghost card above it.
     (function() {
       if (!window.matchMedia('(hover: none)').matches) return;
-      var box = document.createElement('div'); box.id = 'm-preview'; box.setAttribute('aria-hidden', 'true');
-      var imgA = new Image(), imgB = new Image(); imgA.alt = imgB.alt = '';
-      box.appendChild(imgA); box.appendChild(imgB); document.body.appendChild(box);
-      var front = imgA, current = null, activeRow = null, ticking = false;
-      var preloaded = {};
+      var mode = 'ghost';
+      document.documentElement.classList.add('mode-' + mode);
+
+      var FOCUS = { ghost: 0.62, viewfinder: 0, backdrop: 0.45, corner: 0.42 }[mode];
+      var activeRow = null, ticking = false, lastY = window.scrollY, preloaded = {};
       function preload(src) { if (src && !preloaded[src]) { preloaded[src] = 1; var i = new Image(); i.src = src; } }
-      function show(src, light) {
-        if (src === current) return; current = src;
-        if (!src) { box.classList.remove('on'); return; }
-        box.classList.toggle('light-bg', !!light);
-        var back = front === imgA ? imgB : imgA;
-        back.onload = function() { back.classList.add('show'); front.classList.remove('show'); front = back; box.classList.add('on'); };
-        back.src = src;
+      function thumbOf(row) { var a = row && row.querySelector('td.p a'); var src = a ? MUX_THUMBS[a.href] : null; return src ? { src: src, light: LIGHT_BG_THUMBS.has(src), title: a.textContent.trim(), client: row.dataset.client } : null; }
+      function focusY() { return mode === 'viewfinder' ? Math.round(window.innerHeight * 0.44) + 64 : window.innerHeight * FOCUS; }
+
+      // ----- corner -----
+      var corner;
+      if (mode === 'corner') {
+        corner = document.createElement('div'); corner.className = 'm-frame m-corner';
+        corner.innerHTML = '<img alt=""><img alt="">'; document.body.appendChild(corner);
       }
+      // ----- viewfinder -----
+      var vf;
+      if (mode === 'viewfinder') {
+        vf = document.createElement('div'); vf.className = 'm-frame m-vf';
+        vf.innerHTML = '<img alt=""><img alt=""><div class="m-cap"></div>'; document.body.appendChild(vf);
+      }
+      // ----- backdrop -----
+      var bd;
+      if (mode === 'backdrop') {
+        bd = document.createElement('div'); bd.className = 'm-frame m-bd';
+        bd.innerHTML = '<img alt=""><img alt="">'; document.body.appendChild(bd);
+      }
+      function swap(frame, t) {
+        if (!frame) return;
+        var imgs = frame.querySelectorAll('img'), cur = frame._cur || null;
+        if ((t && t.src) === cur) return;
+        frame._cur = t ? t.src : null;
+        var cap = frame.querySelector('.m-cap');
+        if (!t) { frame.classList.remove('on'); return; }
+        var front = frame._front || imgs[0], back = front === imgs[0] ? imgs[1] : imgs[0];
+        back.onload = function() {
+          if (frame._cur !== t.src) return;
+          frame.classList.toggle('light-bg', !!t.light);
+          back.classList.add('show'); front.classList.remove('show'); frame._front = back; frame.classList.add('on');
+          if (cap) cap.textContent = t.title + '  —  ' + t.client;
+        };
+        back.src = t.src;
+      }
+      // ----- ghost trail -----
+      var ghosts = [];
+      function spawnGhost(t) {
+        var vw = window.innerWidth, fy = focusY(), top0 = 56;
+        var w = Math.round(vw * (0.46 + Math.random() * 0.26));
+        var g = document.createElement('div'); g.className = 'm-ghost' + (t.light ? ' light-bg' : '');
+        var img = new Image(); img.alt = '';
+        img.onload = function() {
+          var h = Math.round(w * img.naturalHeight / img.naturalWidth);
+          var maxH = Math.max(120, fy - 28 - top0); if (h > maxH) { h = maxH; w = Math.round(h * img.naturalWidth / img.naturalHeight); }
+          var x = Math.round(Math.random() * Math.max(0, vw - w));
+          var y = Math.round(top0 + Math.random() * Math.max(0, fy - 28 - top0 - h));
+          g.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px';
+          g.appendChild(img); document.body.appendChild(g);
+          requestAnimationFrame(function() { g.classList.add('on'); });
+          ghosts.push(g);
+          while (ghosts.length > 4) kill(ghosts[0]);
+          g._t = setTimeout(function() { kill(g); }, 2400);
+        };
+        img.src = t.src;
+      }
+      function kill(g) { var i = ghosts.indexOf(g); if (i > -1) ghosts.splice(i, 1); clearTimeout(g._t); g.classList.remove('on'); g.classList.add('out'); setTimeout(function() { g.remove(); }, 900); }
+
       function update() {
         ticking = false;
-        var focusY = window.innerHeight * 0.42, best = null, bestD = Infinity;
+        var y = window.scrollY, dy = y - lastY; lastY = y;
+        ghosts.forEach(function(g) { g.style.top = (parseFloat(g.style.top) - dy * 0.35) + 'px'; });
+        var fy = focusY(), best = null, bestD = Infinity;
         var rows = document.querySelectorAll('.index tbody tr:not([hidden])');
         for (var i = 0; i < rows.length; i++) {
           var r = rows[i].getBoundingClientRect();
           if (r.bottom < 0 || r.top > window.innerHeight) continue;
-          var d = Math.abs((r.top + r.bottom) / 2 - focusY);
+          var d = Math.abs((r.top + r.bottom) / 2 - fy);
           if (d < bestD) { bestD = d; best = rows[i]; }
         }
-        if (best && bestD > 90) best = null;   // nothing near the line (e.g. header still on screen)
-        if (best !== activeRow) {
-          if (activeRow) activeRow.classList.remove('is-active');
-          activeRow = best;
-          if (activeRow) activeRow.classList.add('is-active');
-        }
-        var a = activeRow && activeRow.querySelector('td.p a');
-        var src = a ? MUX_THUMBS[a.href] : null;
-        show(src || null, src && LIGHT_BG_THUMBS.has(src));
-        // warm the next few images
-        if (activeRow) { var n = activeRow.nextElementSibling; for (var k = 0; k < 3 && n; k++, n = n.nextElementSibling) { var na = n.querySelector('td.p a'); if (na) preload(MUX_THUMBS[na.href]); } }
+        if (best && bestD > 90) best = null;
+        if (best === activeRow) return;
+        if (activeRow) activeRow.classList.remove('is-active');
+        activeRow = best;
+        if (activeRow) activeRow.classList.add('is-active');
+        var t = thumbOf(activeRow);
+        if (mode === 'ghost') { if (t) spawnGhost(t); }
+        else if (mode === 'viewfinder') { if (t || !activeRow) swap(vf, t); }   // keep last image on rows without one
+        else if (mode === 'backdrop') { if (t || !activeRow) swap(bd, t); }
+        else swap(corner, t);
+        var n = activeRow && activeRow.nextElementSibling;
+        for (var k = 0; k < 3 && n; k++, n = n.nextElementSibling) { var tt = thumbOf(n); if (tt) preload(tt.src); }
       }
       function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
       window.addEventListener('scroll', onScroll, { passive: true });
