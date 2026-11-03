@@ -233,6 +233,25 @@
     .stamp { position: absolute; left: 20px; top: 50%; background: #fff; padding: 14px 16px; transform: translateY(-50%) rotate(-2deg) scale(1.3); opacity: 0; transition: opacity .15s ease, transform .25s cubic-bezier(.2,.9,.3,1.2); z-index: 5; }
     .stamp.on { opacity: 1; transform: translateY(-50%) rotate(-2deg) scale(1); }
     .stamp.lift { transform: translateY(-50%) rotate(0deg) scale(1); transition: transform .5s ease; }
+
+    /* cloud */
+    .cloud-stage { position: absolute; inset: 0; perspective: 900px; perspective-origin: 50% 50%; z-index: 1; }
+    .cloud-cam { position: absolute; inset: 0; transform-style: preserve-3d; transform: translateZ(0); }
+    .cloud-cam.drift { transform: translateZ(160px); transition: transform 2.6s cubic-bezier(.3,.1,.3,1); }
+    .cloud-cam.fly { transform: translateZ(1200px); transition: transform .8s cubic-bezier(.6,0,.9,.5); }
+    .cc { position: absolute; left: 50%; top: 50%; background: #111; opacity: 0; transform: translate3d(-50%, -50%, -700px); transition: transform 1.3s cubic-bezier(.16,1,.3,1), opacity .35s ease; }
+    .cc.light { background: #fff; outline: 1px solid #e6e6ea; }
+    .cc.on { opacity: 1; }
+    #intro .cc img { height: auto; object-fit: initial; }
+    .cloud-row { position: absolute; inset: 0; z-index: 2; display: flex; align-items: center; justify-content: center; gap: 12px; font: bold 16px/1 'Times New Roman', Times, serif; color: #000; pointer-events: none; }
+    .cloud-row span { white-space: nowrap; overflow: hidden; max-width: 160px; transition: opacity .3s ease, max-width .9s cubic-bezier(.16,1,.3,1); }
+    .cloud-row.burst span { opacity: 0; max-width: 0; }
+    .cl-frame { flex: none; width: 56px; height: 56px; background: #111; overflow: hidden; transition: width .3s cubic-bezier(.2,.8,.2,1), height .3s cubic-bezier(.2,.8,.2,1); }
+    .cl-frame.light { background: #fff; outline: 1px solid #e6e6ea; }
+    .cloud-row.burst .cl-frame { transition: width 1.1s cubic-bezier(.16,1,.3,1), height 1.1s cubic-bezier(.16,1,.3,1), transform .8s cubic-bezier(.6,0,.9,.5), opacity .6s ease; }
+    .cloud-row.fly .cl-frame { transform: scale(2.6); opacity: 0; }
+    .cloud-count { position: absolute; left: 0; right: 0; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); text-align: center; font: 11px 'Courier New', Courier, monospace; color: #8a8a8f; transition: opacity .3s ease; z-index: 2; }
+    .cloud-count.away { opacity: 0; }
   </style>
 </head>
 <body>
@@ -826,7 +845,7 @@
 
       // lab switcher, sits in normal page flow at the top (not fixed)
       var sw = document.createElement('div'); sw.className = 'intro-switch';
-      sw.innerHTML = 'intro: ' + ['sheet', 'flip', 'collage'].map(function(m) {
+      sw.innerHTML = 'intro: ' + ['sheet', 'flip', 'collage', 'cloud'].map(function(m) {
         return '<a href="?intro=' + m + (force ? '&force=1' : '') + '"' + (m === mode ? ' aria-current="true"' : '') + '>' + m + '</a>';
       }).join(' / ');
       document.body.insertBefore(sw, document.body.firstChild);
@@ -949,6 +968,71 @@
           }, t0 + 1250);
           later(function() { finish(false); }, t0 + 1900);
         });
+      }
+
+      // ---------- 4. CLOUD: loader line, then the work bursts into a 3D depth cloud ----------
+      if (mode === 'cloud') {
+        var vw = window.innerWidth, vh = window.innerHeight;
+        var stage = document.createElement('div'); stage.className = 'cloud-stage';
+        var cam = document.createElement('div'); cam.className = 'cloud-cam'; stage.appendChild(cam); root.appendChild(stage);
+        var row = document.createElement('div'); row.className = 'cloud-row';
+        row.innerHTML = '<span>Ayden Taylor</span><div class="cl-frame"><img alt=""></div><span>Creative Director</span>';
+        root.appendChild(row);
+        var fr = row.querySelector('.cl-frame'), fimg = fr.querySelector('img');
+        var cnt = document.createElement('div'); cnt.className = 'cloud-count'; cnt.textContent = '000'; root.appendChild(cnt);
+        var picks = work.slice(0, 30), loaded = [], seen = 0, start = Date.now(), bursting = false, cyc = 0, ccards = [];
+        picks.forEach(function(w) {
+          var im = new Image();
+          im.onload = function() { loaded.push(w); seen++; tick(); };
+          im.onerror = function() { seen++; tick(); };
+          im.src = w.src;
+        });
+        function tick() { cnt.textContent = String(Math.round(seen / picks.length * 100)).padStart(3, '0'); }
+        // the frame swaps through the work as it loads, changing shape a little each time
+        var shapes = [[56, 56], [64, 48], [48, 62], [60, 60], [70, 44]];
+        function cycle() {
+          if (done || bursting) return;
+          if (loaded.length) {
+            var w = loaded[cyc % loaded.length], s = shapes[cyc % shapes.length]; cyc++;
+            fimg.src = w.src; fr.classList.toggle('light', w.light);
+            fr.style.width = s[0] + 'px'; fr.style.height = s[1] + 'px';
+          }
+          later(cycle, 240);
+        }
+        cycle();
+        (function check() {
+          var t = Date.now() - start;
+          if (t > 1500 && (seen >= picks.length || t > 2600)) burst(); else later(check, 100);
+        })();
+
+        function burst() {
+          bursting = true;
+          var pool = loaded.length ? loaded : picks, hero = pool[0];
+          fimg.src = hero.src; fr.classList.toggle('light', hero.light);
+          row.classList.add('burst'); cnt.classList.add('away');
+          var hs = Math.round(vw * 0.5); fr.style.width = fr.style.height = hs + 'px';
+          var list = pool.filter(function(w) { return w !== hero; }).slice(0, 26), N = list.length;
+          list.forEach(function(w, k) {
+            var c = document.createElement('div'); c.className = 'cc' + (w.light ? ' light' : '');
+            var size = Math.round(vw * (0.15 + Math.random() * 0.2));
+            var ang = k * 2.39996 + Math.random() * 0.4;            // golden-angle spiral, so nothing clumps
+            var rr = 0.45 + 0.6 * Math.sqrt((k + 1) / N);            // keep a hole around the hero
+            var x = Math.round(Math.cos(ang) * rr * vw * 0.95), y = Math.round(Math.sin(ang) * rr * vh * 0.62);
+            var z = Math.round(-700 + Math.random() * 760);
+            c.style.width = size + 'px';
+            c.dataset.t = 'translate3d(calc(' + x + 'px - 50%), calc(' + y + 'px - 50%), ' + z + 'px)';
+            c.style.transitionDelay = (k * 16) + 'ms';
+            c.innerHTML = '<img alt="" src="' + w.src + '">';
+            cam.appendChild(c); ccards.push(c);
+          });
+          requestAnimationFrame(function() { requestAnimationFrame(function() {
+            ccards.forEach(function(c) { c.style.transform = c.dataset.t; c.classList.add('on'); });
+            cam.classList.add('drift');
+          }); });
+          // fly through the cloud into the index
+          later(function() { cam.classList.add('fly'); row.classList.add('fly'); }, 2300);
+          later(function() { finish(true); }, 2850);
+        }
       }
     })();
   </script>
