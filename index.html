@@ -173,6 +173,7 @@
     .m-ghost.light-bg { background: #fff; }
     .m-ghost.on { opacity: 1; transform: none; }
     .m-ghost.out { opacity: 0; transition: opacity .9s ease; }
+    .m-ghost.out-quick { opacity: 0; transition: opacity .3s ease; }
     .m-ghost img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .m-ghost::after, .m-frame:not(.m-bd)::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 160px; opacity: .06; pointer-events: none; }
     html.mode-corner .m-corner { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
@@ -724,6 +725,7 @@
         var g = document.createElement('div'); g.className = 'm-ghost' + (t.light ? ' light-bg' : '');
         var img = new Image(); img.alt = '';
         img.onload = function() {
+          if (Date.now() - lastScrollAt > 280) return;   // scroll already stopped; don't pop a card over a still list
           var h = Math.round(w * img.naturalHeight / img.naturalWidth);
           var maxH = Math.max(120, fy - 28 - top0); if (h > maxH) { h = maxH; w = Math.round(h * img.naturalWidth / img.naturalHeight); }
           var x = Math.round(Math.random() * Math.max(0, vw - w));
@@ -737,7 +739,10 @@
         };
         img.src = t.src;
       }
-      function kill(g) { var i = ghosts.indexOf(g); if (i > -1) ghosts.splice(i, 1); clearTimeout(g._t); g.classList.remove('on'); g.classList.add('out'); setTimeout(function() { g.remove(); }, 900); }
+      function kill(g, quick) { var i = ghosts.indexOf(g); if (i > -1) ghosts.splice(i, 1); clearTimeout(g._t); g.classList.remove('on'); g.classList.add(quick ? 'out-quick' : 'out'); setTimeout(function() { g.remove(); }, 900); }
+      // when the scroll stops, clear the screen so the list is easy to read and tap
+      var idleT, lastScrollAt = 0;
+      function clearSoon() { clearTimeout(idleT); idleT = setTimeout(function() { ghosts.slice().forEach(function(g) { kill(g, true); }); }, 280); }
 
       function update() {
         ticking = false;
@@ -764,7 +769,7 @@
         var n = activeRow && activeRow.nextElementSibling;
         for (var k = 0; k < 3 && n; k++, n = n.nextElementSibling) { var tt = thumbOf(n); if (tt) preload(tt.src); }
       }
-      function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(update); } }
+      function onScroll() { lastScrollAt = Date.now(); clearSoon(); if (!ticking) { ticking = true; requestAnimationFrame(update); } }
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('resize', onScroll);
       document.querySelectorAll('[data-filter],[data-sort]').forEach(function(b) { b.addEventListener('click', function() { setTimeout(update, 0); }); });
