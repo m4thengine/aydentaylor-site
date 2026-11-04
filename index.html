@@ -189,6 +189,16 @@
       .index td.c, .index td.d { display: inline; width: auto; font-size: 0.95em; }
       .index td.c::after { content: " \00B7  "; color: #8a8a8f; }
     }
+    /* Mobile intro: the work slapped down into a pile, then thrown off. Phones only, once per visit. */
+    html.intro-lock, html.intro-lock body { overflow: hidden; }
+    #intro { position: fixed; inset: 0; z-index: 3000; background: #fff; overflow: hidden; transition: opacity .8s ease, transform .9s cubic-bezier(.7,0,.2,1); }
+    #intro.out { transform: translateY(-100%); }
+    #intro.out-fast { opacity: 0; transition: opacity .25s ease; }
+    #intro img { display: block; width: 100%; height: 100%; object-fit: contain; }
+    .pile .pc { position: absolute; aspect-ratio: 1 / 1; background: #111; overflow: hidden; box-shadow: 0 1px 0 rgba(0,0,0,.08); opacity: 0; transform: rotate(var(--r)) scale(1.18); transition: opacity .14s ease, transform .3s cubic-bezier(.2,.9,.3,1.2); }
+    .pile .pc.light { background: #fff; outline: 1px solid #e6e6ea; }
+    .pile .pc.on { opacity: 1; transform: rotate(var(--r)) scale(1); }
+    .pile .pc.throw { transition: transform .9s cubic-bezier(.6,0,.4,1), opacity .9s ease; transform: translate(var(--tx), var(--ty)) rotate(calc(var(--r) * 4)); opacity: 0; }
   </style>
 </head>
 <body>
@@ -774,6 +784,81 @@
       window.addEventListener('resize', onScroll);
       document.querySelectorAll('[data-filter],[data-sort]').forEach(function(b) { b.addEventListener('click', function() { setTimeout(update, 0); }); });
       update();
+    })();
+    // Mobile intro (phones only, once per visit; add ?intro to replay, &force=1 on desktop). Tap anywhere to skip.
+    (function() {
+      var replay = /[?&]intro\b/.test(location.search), force = /[?&]force=1/.test(location.search);
+      if (!window.matchMedia('(hover: none) and (max-width: 820px)').matches && !force) return;
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      try { if (!replay && sessionStorage.getItem('introSeen')) return; sessionStorage.setItem('introSeen', '1'); } catch (e) {}
+
+      var work = [];
+      document.querySelectorAll('.index tbody tr').forEach(function(tr) {
+        var a = tr.querySelector('td.p a'); if (!a) return;
+        var src = MUX_THUMBS[a.href]; if (!src) return;
+        work.push({ src: src, light: LIGHT_BG_THUMBS.has(src) });
+      });
+      if (work.length < 8) return;
+
+      var root = document.createElement('div'); root.id = 'intro'; root.setAttribute('aria-hidden', 'true');
+      var pile = document.createElement('div'); pile.className = 'pile'; root.appendChild(pile);
+      document.body.appendChild(root);
+      document.documentElement.classList.add('intro-lock');
+
+      var timers = [], done = false;
+      function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+      function finish(fast) {
+        if (done) return; done = true;
+        timers.forEach(clearTimeout);
+        root.classList.add(fast ? 'out-fast' : 'out');
+        document.documentElement.classList.remove('intro-lock');
+        setTimeout(function() { root.remove(); }, fast ? 250 : 900);
+      }
+      root.addEventListener('click', function() { finish(true); });
+      later(function() { finish(true); }, 11000); // safety
+
+      // load everything, but don't hold a slow connection for more than 2s; pieces that aren't in yet are left out
+      var left = work.length, started = false;
+      function one() { if (--left <= 0) start(); }
+      work.forEach(function(w) { var i = new Image(); i.onload = function() { w.ok = true; one(); }; i.onerror = one; i.src = w.src; });
+      later(start, 2000);
+
+      function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)), x = a[i]; a[i] = a[j]; a[j] = x; } return a; }
+      function start() {
+        if (started || done) return; started = true;
+        var ready = work.filter(function(w) { return w.ok; });
+        if (ready.length < 8) { finish(true); return; }
+        var vw = window.innerWidth, vh = window.innerHeight, cards = [];
+        // different every visit: shuffled order, but the last three to land (left on top) are always from the top 20
+        var finale = shuffle(ready.slice(0, 20)).slice(0, 3);
+        var picks = shuffle(ready.filter(function(w) { return finale.indexOf(w) < 0; })).concat(finale);
+        // a slap every ~140ms easing to ~28ms, then the last three land slowly
+        var at = 80;
+        picks.forEach(function(w, k) {
+          later(function() {
+            var c = document.createElement('div'); c.className = 'pc' + (w.light ? ' light' : '');
+            var size = Math.round(vw * (0.42 + Math.random() * 0.3));
+            var x = Math.round((vw - size) * (0.5 + (Math.random() - 0.5) * 0.95));
+            var y = Math.round((vh - size) * (0.5 + (Math.random() - 0.5) * 0.85));
+            var r = (Math.random() * 16 - 8).toFixed(1);
+            c.style.cssText = 'width:' + size + 'px;left:' + x + 'px;top:' + y + 'px;--r:' + r + 'deg';
+            var im = new Image(); im.alt = ''; im.src = w.src; c.appendChild(im);
+            pile.appendChild(c); cards.push(c);
+            var show = function() { requestAnimationFrame(function() { c.classList.add('on'); }); };   // only once decoded, so nothing flashes black
+            (im.decode ? im.decode() : Promise.resolve()).then(show, show);
+          }, at);
+          at += picks.length - k <= 3 ? 230 : Math.max(28, 140 * Math.pow(0.94, k));
+        });
+        later(function() {
+          cards.forEach(function(c, k) {
+            var ang = Math.random() * Math.PI * 2, dist = Math.max(vw, vh) * 1.2;
+            c.style.setProperty('--tx', Math.round(Math.cos(ang) * dist) + 'px');
+            c.style.setProperty('--ty', Math.round(Math.sin(ang) * dist) + 'px');
+            setTimeout(function() { c.classList.add('throw'); }, (cards.length - k) * 8);
+          });
+        }, at + 700);
+        later(function() { finish(false); }, at + 1700);
+      }
     })();
   </script>
 </body>
