@@ -348,7 +348,9 @@
 
     // --- Scattered Ghost Cards ---
     var cards = [];
-    var MAX_CARDS = 8;
+    // ?hold keeps cards on screen (for screenshots): more of them, and they don't fade on their own
+    var HOLD = /[?&]hold\b/.test(location.search);
+    var MAX_CARDS = HOLD ? 40 : 8;
     var ogCache = {};
     var activeThumbUrls = new Set(); // dedupe: no same thumb twice on screen
 
@@ -651,6 +653,7 @@
     });
 
     document.addEventListener('mouseleave', function() {
+      if (HOLD) return;
       cards.forEach(function(c) {
         if (c._autoFade) clearTimeout(c._autoFade);
         fadeOut(c);
@@ -665,7 +668,7 @@
         var idx = cards.indexOf(card);
         if (idx > -1) cards.splice(idx, 1);
         fadeOut(card);
-      }, 3000);
+      }, HOLD ? 600000 : 3000);
     }
 
     // Scroll: parallax drift only — fade is handled by the timer above
