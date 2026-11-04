@@ -598,6 +598,7 @@
 
     function getOgAndSpawn(url, title) {
       var muxThumb = MUX_THUMBS[url];
+      if (!muxThumb) return;   // no image yet: show nothing rather than a black text-only card
       // Skip if this exact thumbnail is already visible
       if (muxThumb && activeThumbUrls.has(muxThumb)) return;
       var isLight = muxThumb && LIGHT_BG_THUMBS.has(muxThumb);
