@@ -169,15 +169,15 @@
     html.mode-backdrop { background: #fff; }
     html.mode-backdrop body { background: transparent; }
     html.mode-backdrop .index tbody tr.is-active { background: rgba(255,255,255,.75); }
-    .m-ghost { position: fixed; z-index: 600; pointer-events: none; background: #111; overflow: hidden; opacity: 0; transform: scale(.98); transition: opacity .25s ease, transform .4s ease; }
+    .m-ghost { position: fixed; z-index: 600; pointer-events: none; background: #111; overflow: hidden; opacity: 0; transform: rotate(var(--r, 0deg)) scale(1.06); transition: opacity .2s ease, transform .3s cubic-bezier(.2,.9,.3,1.2); box-shadow: 0 1px 0 rgba(0,0,0,.08); }
     .m-ghost.light-bg { background: #fff; }
-    .m-ghost.on { opacity: 1; transform: none; }
+    .m-ghost.on { opacity: 1; transform: rotate(var(--r, 0deg)); }
     .m-ghost.out { opacity: 0; transition: opacity .9s ease; }
     .m-ghost.out-quick { opacity: 0; transition: opacity .3s ease; }
     .m-ghost img { width: 100%; height: 100%; object-fit: contain; display: block; }
     .m-ghost::after, .m-frame:not(.m-bd)::after { content: ''; position: absolute; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); background-size: 160px; opacity: .06; pointer-events: none; }
     html.mode-corner .m-corner { bottom: calc(52px + env(safe-area-inset-bottom, 0px)); }
-    @media (hover: none) { #cursor-readout { display: none; } .about-link { position: absolute; } }
+    @media (hover: none) { #cursor-readout { display: none; } .about-link { position: absolute; } html.mode-ghost .page { padding-bottom: 45vh; } }
     button:focus-visible { outline: 2px solid #1155cc; outline-offset: 2px; }
     @media (max-width: 640px) {
       .index thead { display: none; }
@@ -702,7 +702,7 @@
       var mode = 'ghost';
       document.documentElement.classList.add('mode-' + mode);
 
-      var FOCUS = { ghost: 0.62, viewfinder: 0, backdrop: 0.45, corner: 0.42 }[mode];
+      var FOCUS = { ghost: 0.42, viewfinder: 0, backdrop: 0.45, corner: 0.42 }[mode];
       var activeRow = null, ticking = false, lastY = window.scrollY, preloaded = {};
       function preload(src) { if (src && !preloaded[src]) { preloaded[src] = 1; var i = new Image(); i.src = src; } }
       function thumbOf(row) { var a = row && row.querySelector('td.p a'); var src = a ? MUX_THUMBS[a.href] : null; return src ? { src: src, light: LIGHT_BG_THUMBS.has(src), title: a.textContent.trim(), client: row.dataset.client } : null; }
@@ -745,17 +745,19 @@
       // ----- ghost trail -----
       var ghosts = [];
       function spawnGhost(t) {
-        var vw = window.innerWidth, fy = focusY(), top0 = 56;
-        var w = Math.round(vw * (0.46 + Math.random() * 0.26));
+        // cards only land in a band along the bottom of the screen, so the list above stays readable
+        var vw = window.innerWidth, vh = window.innerHeight, bandTop = Math.round(vh * 0.66), bandBot = vh - 14;
+        var w = Math.round(vw * (0.34 + Math.random() * 0.2));
         var g = document.createElement('div'); g.className = 'm-ghost' + (t.light ? ' light-bg' : '');
         var img = new Image(); img.alt = '';
         img.onload = function() {
           if (Date.now() - lastScrollAt > 280) return;   // scroll already stopped; don't pop a card over a still list
           var h = Math.round(w * img.naturalHeight / img.naturalWidth);
-          var maxH = Math.max(120, fy - 28 - top0); if (h > maxH) { h = maxH; w = Math.round(h * img.naturalWidth / img.naturalHeight); }
-          var x = Math.round(Math.random() * Math.max(0, vw - w));
-          var y = Math.round(top0 + Math.random() * Math.max(0, fy - 28 - top0 - h));
-          g.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px';
+          var maxH = bandBot - bandTop; if (h > maxH) { h = maxH; w = Math.round(h * img.naturalWidth / img.naturalHeight); }
+          var x = Math.round(10 + Math.random() * Math.max(0, vw - w - 20));
+          var y = Math.round(bandTop + Math.random() * Math.max(0, maxH - h));
+          var r = (Math.random() * 8 - 4).toFixed(1);
+          g.style.cssText = 'left:' + x + 'px;top:' + y + 'px;width:' + w + 'px;height:' + h + 'px;--r:' + r + 'deg';
           g.appendChild(img); document.body.appendChild(g);
           requestAnimationFrame(function() { g.classList.add('on'); });
           ghosts.push(g);
@@ -772,7 +774,6 @@
       function update() {
         ticking = false;
         var y = window.scrollY, dy = y - lastY; lastY = y;
-        ghosts.forEach(function(g) { g.style.top = (parseFloat(g.style.top) - dy * 0.35) + 'px'; });
         var fy = focusY(), best = null, bestD = Infinity;
         var rows = document.querySelectorAll('.index tbody tr:not([hidden])');
         for (var i = 0; i < rows.length; i++) {
