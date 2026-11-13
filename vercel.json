@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/img/w/:name-ayden-taylor.jpg", "destination": "/api/img?n=:name" }
+  ]
+}
